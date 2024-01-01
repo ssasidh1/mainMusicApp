@@ -396,3 +396,14 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build output
+build/
+
+# Ignore editor-specific files
+.vscode/
+nodeTS/node_modules/
+nodeTS/vars/
+front-end/music-front/node_modu

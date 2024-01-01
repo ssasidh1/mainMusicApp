@@ -1,0 +1,69 @@
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username":"ak"
+}
+
+###
+GET http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWsiLCJpYXQiOjE3MDI4NTEyMDQsImV4cCI6MTcwMjg1MTIzOX0.8C4YDqPKESjyO7J8KrVArwtbo35TqpotNYICSkt_QnU
+
+
+###
+
+POST http://localhost:3005/login
+Content-Type: application/json
+
+{
+    "email":"srinidhisasidharan99@gmail.com",
+    "password":"Srinidhi@12345",
+    "username":"srindhiSasidharan99"
+}
+
+
+###
+POST http://localhost:3005/insertPlaylist
+Content-Type: application/json
+
+{
+    "email":"srinidhisasidharan@gmail.com",
+    "playlist":"Selena",
+    "songs":[]
+}
+
+###
+POST http://localhost:3005/insertPlaylist
+Content-Type: application/json
+
+{
+    "email":"srinidhisasidharan@gmail.com",
+    "playlist":"BTS",
+    "songs":[
+    {
+        "title":"life goes on",
+        "folder":"BTS",
+        "duration":4,
+        "artist":"BTS",
+        "file":"life goes on.mp3"
+    }]
+}
+
+###
+POST  http://localhost:3005/deleteFromPlaylist
+Content-Type: application/json
+
+{
+    "email":"srinidhisasidharan@gmail.com",
+    "playlist":"Taylor",
+    "title":"life goes on"
+}
+
+###
+DELETE   http://localhost:3005/deletePlaylist
+Content-Type: application/json
+
+{
+    "email":"srinidhisasidharan@gmail.com",
+    "playlist":"Taylor"
+}
