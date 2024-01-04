@@ -16,9 +16,9 @@ POST http://localhost:3005/login
 Content-Type: application/json
 
 {
-    "email":"srinidhisasidharan99@gmail.com",
-    "password":"Srinidhi@12345",
-    "username":"srindhiSasidharan99"
+    "email":"sr@gmail.com",
+    "password":"1234567890",
+    "username":"sr"
 }
 
 
@@ -66,4 +66,12 @@ Content-Type: application/json
 {
     "email":"srinidhisasidharan@gmail.com",
     "playlist":"Taylor"
+}
+
+###
+POST http://localhost:3005/userPlaylist
+Content-Type: application/json
+
+{
+    "folder":"BTS"
 }

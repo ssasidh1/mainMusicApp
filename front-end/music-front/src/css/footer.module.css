@@ -1,0 +1,28 @@
+.footer{
+    background-color: #191818;
+    height: 100%;
+    
+}
+
+.folder{
+    display: flex;
+    gap:0.5rem;
+    align-items: baseline;
+    margin-top: 2rem;
+    color:whitesmoke
+}
+
+.footer-props{
+    display: flex;
+    flex-direction: row;
+    gap:45rem;
+ }
+
+ .playlist-logo{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: larger;
+}
+
+ 

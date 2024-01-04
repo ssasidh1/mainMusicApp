@@ -12,7 +12,9 @@ import FastForwardIcon from '@mui/icons-material/FastForward';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Slider,Typography} from '@mui/material';
+import { useToken } from './context';
 function Player({src}) {
     const audioRef= useRef()
     const [currentSong] = useState(src)
@@ -22,7 +24,9 @@ function Player({src}) {
     const [mute, setMute] = useState(false);
     const [elapsed, setElapsed] = useState(0);
     const [duration, setDuration] = useState(0);
-
+    const [showMoreOpt,setShowMoreOpt] = useState(false)
+    let folder,songName,time,artist,file;
+    const {email} = useToken();
     const togglePlay = ()=>{
         if(!isPlaying){
             audioRef.current.play()
@@ -32,7 +36,13 @@ function Player({src}) {
         }
         setIsPlaying(prev=>!prev)
     }
+  
     useEffect(()=>{
+        if(currentSong)
+        {
+            const audioUrl = currentSong;
+            getAudioDuration(audioUrl);
+        }
         if(audioRef && audioRef.current){
             audioRef.current.volume = volume/100
         }
@@ -47,24 +57,27 @@ function Player({src}) {
             }, 100);
             return () => clearInterval(interval);
         }
-    },[volume,isPlaying])
-    useEffect(()=>{
-        if(isFav){
+        if(currentSong && duration){
             console.log(currentSong)
             const res = currentSong.split('/')
             const path = res[res.length-1]
             //console.log(path)
             const foldersong = path.split('%2F')
-            const folder = foldersong[0];
-            const song = foldersong[1]
-            //console.log(folder,song)
+            folder = foldersong[0];
+            songName = foldersong[1].split('.mp3')[0]
+            file = foldersong[1]
+            artist=foldersong[0]
+            time=duration
         }
-    },[isFav])
-    useEffect(()=>{
-        if(currentSong)
-        {const audioUrl = currentSong;
-        getAudioDuration(audioUrl);}
-    },[currentSong])
+        if(isFav){
+            console.log(isFav)
+            const r = async()=>{await showmoreClick()}
+            console.log("r",r)
+            r();
+        }
+        
+    },[isFav,currentSong,volume,isPlaying])
+   
 
     function formatTime(time) {
         if(time && !isNaN(time)){
@@ -108,6 +121,34 @@ async function getAudioDuration(audioUrl) {
   }
 }
 
+const showmoreClick = async()=>{
+    console.log("called")
+    if(folder && songName && file && artist && time){
+        // must add playlist name, custom given by user
+        const folderName = isFav ? "LikedSongs":folder
+        console.log("foldername",email)
+        const songParams = {folder:folderName,songName:songName,file:file,artist:artist,duration:time}
+        const response = email ? await fetch('http://localhost:3005/insertPlaylist',{
+        method:"POST",
+        mode:"cors",
+        headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email:email,
+            playlist:folderName,
+            songs:[songParams]
+
+          }),
+        }):
+        null;
+        if(response){
+            console.log("Show more ",response);
+        }
+    }
+    
+}
+
 // Example usage:
 
 
@@ -136,9 +177,16 @@ async function getAudioDuration(audioUrl) {
                     />}
                     <FastForwardIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/>
                     <SkipNextIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/>
+                    
+                </div>
+                <div className={style['stack4-div']}>
                     {!isFav ? <FavoriteBorderIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}} onClick={handleFav}/>
                     :<FavoriteIcon sx= {{color:'white','&:hover':{color:'silver'},cursor:'pointer'}} onClick={()=>{setIsFav(prev=>!prev)}}/>
                     }
+                    <MoreVertIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}} onClick= {()=>setShowMoreOpt((prev)=>!prev)}/>
+                    {showMoreOpt&&<div className={style['showmore']}>
+                        <button onClick={showmoreClick}>add playlist</button>
+                    </div>}
                 </div>
                 
             </div>

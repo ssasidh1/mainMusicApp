@@ -1,11 +1,10 @@
 .div-bg{
-    background-color: black;
     width:550px;
     height:100px;
-    border: solid 2px red;
+
 }
 .audio-div{
-    background-color: #4c4c4c;
+    
     width:500px;
     height:70px;
     margin-left: 10px;
@@ -38,11 +37,18 @@
     align-items: center;
     gap: 10px;
     justify-content: flex-end;
-    padding-right: 130px;
 }
 .stack3-div{
     display: flex;
     align-items: center;
     direction: row;
     gap: 10px;
+}
+.stack4-div{
+    display:flex;
+    width: 40%;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+    
 }

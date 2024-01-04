@@ -5,7 +5,7 @@ import jwt,{Secret} from 'jsonwebtoken'
 import {jwtToken,genTkFromRefreshTk} from './generateToken.js'
 import cors from 'cors'
 import { IUserAuthInfoReq } from './IUserAuthInfoReq';
-import { getPlaylists } from './s3.js';
+import { getPlaylists, getUserPlaylist } from './s3.js';
 import addPlayList from './addPlaylist.js';
 import deleteFromPlaylist from './deleteFromPlaylist.js'
 import deletePlaylist from './deletePlaylist.js';
@@ -13,6 +13,7 @@ const app = express();
 app.use(express.json())
 app.use(cors())
 getPlaylists(app)
+getUserPlaylist(app);
 app.post("/signup",async(req,res)=>{
     try{
         // console.log(req.body)
@@ -44,6 +45,7 @@ app.post("/deleteFromPlaylist",async(req,res)=>{
         res.sendStatus(500)
     }
 })
+
 app.delete("/deletePlaylist",async(req,res)=>{
     try{
         // console.log(req.body)

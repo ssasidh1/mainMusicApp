@@ -54,12 +54,12 @@ export function getPlaylists(app:Express){
         return null;
       });
       if (audioUrls.length > 0) {
-        console.log("@@@@@@@",audioUrls,folderName,"#####")
+       // console.log("@@@@@@@",audioUrls,folderName,"#####")
         playlist.push({
           folder: folderName,
           audioUrls: audioUrls.filter((url) => url !== null),
         });
-        console.log("play",playlist)
+        //console.log("play",playlist)
       }
       
     }
@@ -91,15 +91,57 @@ res.json(playlist);
       res.sendStatus(500);
     }
 
+
   });
 
-  app.get('/stream/:key', (req:Request, res:Response) => {
+   app.get('/stream/:key', (req:Request, res:Response) => {
     res.setHeader('Content-Type', 'audio/mpeg');
     const key = req.params.key; // Set the appropriate content type for MP3
     const fileStream = s3.getObject({ Bucket: bucketName, Key: key }).createReadStream();
     fileStream.pipe(res);
   });
 }
+
+  export function getUserPlaylist(app:Express){
+    app.post('/userPlaylist', /*authenticateToken*/async (req:Request, res:Response) => {
+      console.log("inside my userplaylist",req.body.folder)
+      try {
+        const playlist = []
+        const paramsListFolders = {
+          Bucket: bucketName,
+          Prefix:req.body.folder
+        };
+        
+        const dataFiles = await s3.listObjects(paramsListFolders).promise();
+        const contents = dataFiles?.Contents ?? [];
+        // console.log("contents",contents)
+        const audioUrls = contents.map((object) => {
+          if (object.Key && object.Key.endsWith("mp3")) {
+            return `http://localhost:3005/stream/${encodeURIComponent(object.Key)}`;
+          }
+          return null;
+        });
+        if (audioUrls.length > 0) {
+          console.log("@@@@@@@",audioUrls,paramsListFolders.Prefix,"#####")
+          playlist.push({
+            folder: paramsListFolders.Prefix,
+            audioUrls: audioUrls.filter((url) => url !== null),
+          });
+           console.log("play",playlist)
+        }
+        res.json(playlist);
+      } catch (error) {
+        console.error('Error serving audio files:', error);
+        res.sendStatus(500);
+      }
+  
+    });
+  
+  
+  
+ 
+}
+
 
 
 

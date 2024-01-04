@@ -4,6 +4,7 @@ import AudioPlayer from './Audioplayer.js';
 import Login from './login.js'
 import Signup from './signup.js';
 import Home from './home.js'
+import MainPage from './mainPage.js';
 import { TokenProvider,useToken } from './context'
 import {HashRouter, Navigate, Route,Routes} from "react-router-dom"
 function App() {
@@ -13,7 +14,9 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/home" element={<Home/>} />
-        <Route path= "*" element = {<Navigate to = "/login"/>}/>
+        <Route path="/mainPage" element={<MainPage/>}/>
+        <Route path= "*" element = {<Navigate to = "/MainPage"/>}/>
+
      </Routes>
      </TokenProvider>
   );

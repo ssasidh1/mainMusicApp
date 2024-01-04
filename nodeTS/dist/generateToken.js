@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-dotenv.config();
+dotenv.config({ path: 'vars/.env' });
 const app = express();
 app.use(express.json());
 let refreshTokens = [];
@@ -41,6 +41,7 @@ app.delete('/logout', (req, res) => {
 //must using login route
 export function jwtToken(username) {
     const user = { name: username };
+    console.log("ac", process.env.ACCESS_TOKEN);
     if (username && process.env.ACCESS_TOKEN && process.env.REFRESH_TOKEN) {
         const accessTOKEN = process.env.ACCESS_TOKEN;
         const token = generateAccessToken(user, accessTOKEN);
