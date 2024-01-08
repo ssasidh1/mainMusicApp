@@ -1,22 +1,22 @@
 import React,{useEffect} from 'react'
 import styles from './css/body.module.css'
-import { useToken } from './context'
-function Body() {
-  const {songs} =useToken()
-  console.log("body",songs)
+function Body({playlist,url}) {
+ 
   return (
-    <div>
+    <div >
         {
-          songs.length>0 && 
           <div className={styles['playlist']}>
-            <div className={styles['image']}>
-                {/* image */}
+            <div className={styles['card']}>
+              <div className={styles['image']}>
+                  <div className={styles['folder-circle']}>
+                        {playlist}
+                    </div>
+              </div>
             </div>
             <div className={styles['details']}>
-             {/* <span className={styles['type']}>Playlist</span> */}
-             {/* <h1 className={styles['title']}>{songs[0].folder}</h1> */}
-            </div>
-
+                <span className={styles['playlist-name']}>{playlist}</span>
+                <span className={styles['artist']}>{url[0].artist}</span>
+              </div>
           </div>
         }
     </div>

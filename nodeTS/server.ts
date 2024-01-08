@@ -5,7 +5,7 @@ import jwt,{Secret} from 'jsonwebtoken'
 import {jwtToken,genTkFromRefreshTk} from './generateToken.js'
 import cors from 'cors'
 import { IUserAuthInfoReq } from './IUserAuthInfoReq';
-import { getPlaylists, getUserPlaylist } from './s3.js';
+import { getAllPlaylistSongs, getPlaylists, getUserPlaylist } from './s3.js';
 import addPlayList from './addPlaylist.js';
 import deleteFromPlaylist from './deleteFromPlaylist.js'
 import deletePlaylist from './deletePlaylist.js';
@@ -14,6 +14,7 @@ app.use(express.json())
 app.use(cors())
 getPlaylists(app)
 getUserPlaylist(app);
+getAllPlaylistSongs(app)
 app.post("/signup",async(req,res)=>{
     try{
         // console.log(req.body)
@@ -67,10 +68,10 @@ app.delete("/deletePlaylist",async(req,res)=>{
 app.post("/login",async(req,res)=>{
     try{
         // console.log(req.body)
-        console.log("inisde")
+        //console.log("inisde")
         const resp = jwtToken(req.body.email);
         const resp1 =await authUsersFromDB(req.body.email,req.body.password)
-        console.log(resp1)
+        //console.log(resp1)
         res.json(resp)
     }catch(e){
         console.log("In add user details",e)
@@ -82,13 +83,13 @@ export function authenticateToken(req:Request,res:Response, next:NextFunction){
     const authHeader = req.headers['authorization']
     const refreshTK:any = req.headers['refresh-token']
     let token:string|undefined|null = authHeader && authHeader?.split(" ")[1]
-    console.log("Token",token)
+    //console.log("Token",token)
     if(token === null) return res.sendStatus(401)
     if(token && process.env.ACCESS_TOKEN){
         const accessTK = process.env.ACCESS_TOKEN
         jwt.verify(token,accessTK, (err,username)=>{
             if(err) {
-                console.log(err.name)
+                //console.log(err.name)
                 if(err.name === 'TokenExpiredError'){
                     console.log("tk",refreshTK)
                     token = genTkFromRefreshTk(refreshTK);

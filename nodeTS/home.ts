@@ -29,11 +29,11 @@ export const getPlaylist = async(res:Response)=>{
     res.setHeader('Content-Type', 'audio/mpeg');
     for (const obj of contents){
         if(obj.Key){
-            console.log("key",obj.Key)
+            //console.log("key",obj.Key)
             const fileStream = s3.getObject({ Bucket: bucketName, Key: obj.Key }).createReadStream();
             fileStream.pipe(res, { end: false });
             fileStream.on('end', () => {
-                console.log(`Stream for ${obj.Key} ended`);
+                //console.log(`Stream for ${obj.Key} ended`);
               });
         }
        

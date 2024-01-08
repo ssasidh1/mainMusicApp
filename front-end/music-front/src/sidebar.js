@@ -15,7 +15,7 @@ export default function Sidebar() {
     const {songs,setColour} = useToken()
     const [selectSong, setSelectSong] = useState(false)
     
-    console.log("side",songs)
+   
   return (
     <div className={styles['container']}>
         <div className={styles['sidebar-links']}>

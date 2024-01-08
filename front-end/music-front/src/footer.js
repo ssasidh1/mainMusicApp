@@ -14,7 +14,6 @@ export default function Footer({curr}) {
   return (
     <div className={styles['footer']}>
       <div className={styles['footer-props']}>
-      
                 {currFolder &&<div className={styles['folder']}>
                 <div className={styles['playlist-logo']} style={{ backgroundColor: `#${c.b}`,color:`#${c.i}`}}>
                             {currFolder.charAt(0).toUpperCase()}

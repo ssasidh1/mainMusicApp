@@ -1,0 +1,51 @@
+.playlist{
+    width:12rem;
+    height: 15rem;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: linear-gradient(transparent,rgb(0,0,1));
+     background-color: rgb(69, 23, 74);
+}
+.playlist:hover{
+    background: linear-gradient(transparent,rgba(0, 0, 1, 0.744));
+     background-color: rgb(87, 30, 94);
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgb(35, 39, 38);
+    border-radius: 0.75rem;
+    gap:0.5rem;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:0.5rem;
+}
+
+.playlist-name{
+    font-size: larger;
+    color: white;
+    font-weight:bold ;
+
+}
+
+.artist{
+    font-weight: 300;
+    color: silver;
+    font-size: small;
+}
+
+
+

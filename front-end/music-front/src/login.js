@@ -13,7 +13,7 @@ function Login() {
         nav("/signup")
     }
     const handleLogin = async()=>{
-      //console.log(email.current.value,password.current.value)
+      console.log(email.current.value,password.current.value)
       const res = await AuthUsersFromDB(email.current.value,password.current.value)
       
       //console.log(res)

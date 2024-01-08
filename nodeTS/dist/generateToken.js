@@ -9,11 +9,11 @@ export function genTkFromRefreshTk(refreshToken) {
     // if(!refreshTokens.includes(refreshToken)) return null; // must add the list to db
     if (process.env.REFRESH_TOKEN && process.env.ACCESS_TOKEN) {
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
-            console.log("refresh eror", err);
+            //console.log("refresh eror",err)
             if (err)
                 return null;
             const accessTK = generateAccessToken({ name: user.name }, process.env.ACCESS_TOKEN);
-            console.log("####", accessTK);
+            //console.log("####",accessTK)
             return accessTK;
         });
         return null;
@@ -41,7 +41,7 @@ app.delete('/logout', (req, res) => {
 //must using login route
 export function jwtToken(username) {
     const user = { name: username };
-    console.log("ac", process.env.ACCESS_TOKEN);
+    //console.log("ac",process.env.ACCESS_TOKEN)
     if (username && process.env.ACCESS_TOKEN && process.env.REFRESH_TOKEN) {
         const accessTOKEN = process.env.ACCESS_TOKEN;
         const token = generateAccessToken(user, accessTOKEN);

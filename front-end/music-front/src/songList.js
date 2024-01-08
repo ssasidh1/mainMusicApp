@@ -9,7 +9,7 @@ const SongList = ({token}) => {
     const fetchSongs = async () => {
       try {
         //console.log("at",token.rt)
-        const response = await fetch('http://localhost:3005/playlistz',{
+        const response = await fetch('http://localhost:3005/getAllPlaylistAndSongs',{
             method:"GET",
             headers:{
                 Authorization : `Bearer ${token.at}`,
@@ -18,8 +18,8 @@ const SongList = ({token}) => {
             
         });
         const songUrls = await response.json();
-        setSongsTK(songUrls);
-
+        //setSongsTK(songUrls);
+        console.log("songLis",songUrls)
         
       } catch (error) {
         console.error('Error fetching songs:', error);

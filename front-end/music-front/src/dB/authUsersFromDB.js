@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default async function AuthUsersFromDB(email, password) {
-    // console.log("user",user)
+    console.log("user",email,password)
     const res = await fetch('http://localhost:3005/login',{
         method:"POST",
         mode:"cors",

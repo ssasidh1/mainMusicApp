@@ -95,6 +95,7 @@ function Player({src}) {
     function VolumeBtns(){
         return mute
             ? <VolumeOffIcon sx={{color: 'silver', '&:hover': {color: 'white'}}} onClick={() => setMute(!mute)} />
+            : volume < 20 ? <VolumeOffIcon sx={{color: 'silver', '&:hover': {color: 'white'}}} onClick={() => setMute(!mute)} />
             : volume <= 20 ? <VolumeMuteIcon sx={{color: 'silver', '&:hover': {color: 'white'}}} onClick={() => setMute(!mute)} />
             : volume <= 75 ? <VolumeDownIcon sx={{color: 'silver', '&:hover': {color: 'white'}}} onClick={() => setMute(!mute)} />
             : <VolumeUpIcon sx={{color: 'silver', '&:hover': {color: 'white'}}} onClick={() => setMute(!mute)} />
@@ -161,7 +162,7 @@ const showmoreClick = async()=>{
                 <div className={style['stack-div']}>
                     {/* <VolumeDownIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/> */}
                     <VolumeBtns/>
-                    <Slider sx= {{color:'silver',height:2,'&:hover':{color:'white',cursor:'auto'},
+                    <Slider sx= {{color:'silver',width:'5rem',height:2,'&:hover':{color:'white',cursor:'auto'},
                     '& .MuiSlider-thumb':{width:'13px',height:'13px'},min:0,max:1, value:{volume}}}
                      onChange={(e,v)=>{setVolume(v)}}/>
                 </div>
@@ -177,7 +178,7 @@ const showmoreClick = async()=>{
                     />}
                     <FastForwardIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/>
                     <SkipNextIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/>
-                    
+                
                 </div>
                 <div className={style['stack4-div']}>
                     {!isFav ? <FavoriteBorderIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}} onClick={handleFav}/>
@@ -192,9 +193,10 @@ const showmoreClick = async()=>{
             </div>
             <div className={style['stack3-div']}>
                     <Typography sx={{color:'silver'}}>{formatTime(elapsed)}</Typography>
-                    <Slider  sx= {{color:'silver',width:"400px",height:2,'&:hover':{color:'white',cursor:'auto'},
+                    <Slider value={elapsed} sx= {{color:'silver',width:"100%",height:2,'&:hover':{color:'white',cursor:'auto'},
                     '& .MuiSlider-thumb':{width:'13px',height:'13px',display: 'none',} ,value:{elapsed} ,max :{duration}} }
                     />
+                    {console.log('elapsed',elapsed)}
                     <Typography sx={{color:'silver'}}>{formatTime(duration - elapsed)}</Typography>
             </div>
         </div>

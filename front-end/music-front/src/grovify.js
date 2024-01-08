@@ -6,9 +6,11 @@ import Navbar from './navbar'
 import styles from './css/grovify.module.css'
 import SongList from './songList'
 import { useToken } from './context'
+import BodyC from './bodyConnector'
 
 export default function Grovify(token) {
     const {songs,setCurrFolder,setCurrentSong,currFolder,currentSong}=useToken()
+    const [isplaylist,setPlaylist] = useState(false);
     SongList(token)
     let curr ;
     
@@ -19,6 +21,7 @@ export default function Grovify(token) {
             setCurrFolder(songs[0].folder)
         }
     },[songs])
+    
   return (
     <div className={styles['container']}>
         <div className={styles['grovify_body']}>
@@ -26,7 +29,7 @@ export default function Grovify(token) {
             <div className={styles['body']}>
                 <Navbar />
                 <div className={styles['body_contents']}>
-                    <Body />
+                    <BodyC isSelected={isplaylist}/>
                     {console.log(currentSong)}
                     
                 </div>

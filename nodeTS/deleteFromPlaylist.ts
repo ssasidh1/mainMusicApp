@@ -8,7 +8,7 @@ async function deleteFromPlaylist(emailID:string, playlist:string, title:string)
             {emailID:emailID,'playlist.playlistName':playlist},
             {$pull:{'playlist.$.songs':{title:title}}}
         );
-        console.log("delete",res)
+        //console.log("delete",res)
     }catch(e){
         console.log("delete error",e)
     }
