@@ -1,7 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import Footer from './footer'
 import Sidebar from './sidebar'
-import Body from './body'
 import Navbar from './navbar'
 import styles from './css/grovify.module.css'
 import SongList from './songList'
@@ -9,19 +8,18 @@ import { useToken } from './context'
 import BodyC from './bodyConnector'
 
 export default function Grovify(token) {
-    const {songs,setCurrFolder,setCurrentSong,currFolder,currentSong}=useToken()
-    const [isplaylist,setPlaylist] = useState(false);
+    const {songs,setCurrFolder,setCurrentSong,currentSong}=useToken()
     SongList(token)
     let curr ;
     
     useEffect(()=>{
-        curr =songs && songs[0] ? songs[0].audioUrls[0]:null
+        curr =songs && songs[0] ? songs[0].details[0].audio:null
         if(curr!==null){
             setCurrentSong(curr)
-            setCurrFolder(songs[0].folder)
+            setCurrFolder(songs[0])
         }
     },[songs])
-    
+    console.log("song",songs)
   return (
     <div className={styles['container']}>
         <div className={styles['grovify_body']}>
@@ -29,15 +27,15 @@ export default function Grovify(token) {
             <div className={styles['body']}>
                 <Navbar />
                 <div className={styles['body_contents']}>
-                    <BodyC isSelected={isplaylist}/>
-                    {console.log(currentSong)}
+                    <BodyC />
+                    
                     
                 </div>
             </div>
         </div>
         <div className={styles['footer']}>
+            <Footer/>
             
-            {currFolder&&currentSong&&<Footer curr={{folder:currFolder,song:currentSong}}/>}
         </div>
         
     </div>

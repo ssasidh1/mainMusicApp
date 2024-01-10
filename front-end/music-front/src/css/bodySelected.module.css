@@ -1,0 +1,37 @@
+.selected-playlist{
+    width:95%;
+   
+}
+.playlist-img{
+    width: 15rem;
+    border-radius: 0.5rem;
+}
+
+.playlist-details{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-end;
+}
+.playlist-highlights{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.playlistName{
+    font-size: 50px;
+    color: white;
+}
+.playlistArtist{
+    font-size: 15px;
+    color: white;
+}
+.noOfsongs{
+    font-size: 15x;
+    color: white;
+}
+.extra{
+    display: flex;
+    align-items: center;
+    gap:0.5rem;
+}

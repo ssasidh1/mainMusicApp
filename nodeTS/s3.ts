@@ -181,7 +181,7 @@ const getAllPlaylists = async () => {
         const playlistN = playlistPrefix.Prefix?.replace("/","")
         return{
           playlistName: playlistN,
-          imageURl:`s3://${bucketN}/${playlistPrefix.Prefix}${playlistN}.jpeg`
+          imageURl:`https://${bucketN}.s3.amazonaws.com/${playlistPrefix.Prefix}${playlistN}.jpeg`
         }
       })
 
@@ -214,19 +214,20 @@ const getFilesForPlaylist = async (playlistName:any) => {
       Bucket: bucketN,
       Prefix:`${playlistName}/`
     };
-    let currFile:any;
+    
     const data = await s3.listObjectsV2(params).promise();
     //console.log("data",data.Contents)
     
     if(data.Contents)
-    {let tem:any={}
+    {
+      let tem:any={}
       const files = await Promise.all(data.Contents.map(async(file) => {
-        
-        console.log("lets begin")
+        let currFile:any;
+        //console.log("lets begin")
       if(file.Key )
       {
         
-        if(file.Key?.endsWith("/")){
+        // if(file.Key?.endsWith("/")){
           //console.log('fil',file.Key)
           const metadataParams = {
             Bucket: bucketN,
@@ -234,12 +235,35 @@ const getFilesForPlaylist = async (playlistName:any) => {
           };
            const metadata = await s3.headObject(metadataParams).promise();
            if(metadata.Metadata ){
-            currFile =metadata.Metadata
-            //console.log("c",metadata.Metadata)
-            if(Object.keys(metadata.Metadata).length>0)return currFile
+            
+            console.log("c",metadata.Metadata)
+            if(Object.keys(metadata.Metadata).length>0 && file.Key.split('/').length > 2){
+              currFile =metadata.Metadata
+              const songPrefix = file.Key.substring(0, file.Key.lastIndexOf('/'));
+
+              const temPath = `https://${bucketN}.s3.amazonaws.com/${songPrefix}`;
+              //console.log("tempath",temPath)
+              
+              
+              if (!tem[temPath]) {
+                //console.log("check temp path",tem[temPath])
+                  tem[temPath] = {};
+              }
+              //console.log("\n^^^^^currfile",currFile)
+              if(currFile.artist && !tem[temPath]['artist'])
+              {
+                //console.log("\nartist",currFile.artist)
+                tem[temPath]['artist']= currFile.artist
+              }
+             if(currFile.songname && !tem[temPath]['songName'])
+             {
+              //console.log("\songName",currFile.songname)
+              tem[temPath]['songName']= currFile.songname
+            }
+            }
            }
            
-         }
+         //}
         
         if(file.Size && file.Key.split('/').length > 2){
           const fileName = file.Key.split('/').pop(); 
@@ -250,22 +274,23 @@ const getFilesForPlaylist = async (playlistName:any) => {
               const temKey = fileName.endsWith('.mp3') ? 'audio' : fileName.endsWith('.jpeg') ? 'image' : null;
 
             if (temKey) {
-                const temPath = `s3://${bucketName}/${songPrefix}`;
-                console.log("tempath",temPath,temKey)
+                const temPath = `https://${bucketN}.s3.amazonaws.com/${songPrefix}`;
+                //console.log("tempath",temPath,temKey)
                 
                 
                 if (!tem[temPath]) {
-                  console.log("check temp path",tem[temPath])
+                  //console.log("check temp path",tem[temPath])
                     tem[temPath] = {};
                 }
                
                 if(!tem[temPath][temKey]){
-                  console.log("check",tem[temPath][temKey]);
-                  tem[temPath][temKey] = `s3://${bucketName}/${file.Key}`;
+                  //console.log("check",tem[temPath][temKey]);
+                  tem[temPath][temKey] = `https://${bucketN}.s3.amazonaws.com/${file.Key}`;
                 }
 
                 
             }
+          
           }
         }
        
@@ -289,8 +314,8 @@ const getFilesForPlaylist = async (playlistName:any) => {
 //     }
 //     return result;
 // }, []);
-
-  console.log("combined",tem)
+const res:Object[] = Object.values(tem)
+  //console.log("combined",tem)
     return tem
     
   }
@@ -309,7 +334,7 @@ export async function getAllPlaylistSongs(app:Express){
   async(req:Request, res:Response)=>{
       try {
       const playlists = await getAllPlaylists();
-      console.log("playlists",playlists)
+      //console.log("playlists",playlists)
       let allPlayLists:any=[]
       if(playlists)
         {
@@ -317,13 +342,13 @@ export async function getAllPlaylistSongs(app:Express){
           for (const playlist of playlists) {
         // console.log(playlist)
           const files = await getFilesForPlaylist(playlist.playlistName);
-          //console.log(files)
+          //console.log("\n %%%%%%",files)
           let artist
           if(files !== undefined) 
           {
             //not sure if always the first index holds artist name
-             artist = files.artist
-            allPlayLists.push({playlistName:playlist.playlistName, playlistImage: playlist.imageURl, artist:artist,songs:files})
+            //  artist = files.artist
+            allPlayLists.push({playlistName:playlist.playlistName, playlistImage: playlist.imageURl,details:Object.values(files)})
           //console.log("filex,",allPlayLists[0])
           }
           // if(files)

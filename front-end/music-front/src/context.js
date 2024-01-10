@@ -1,4 +1,4 @@
-import { createContext,useContext,useState } from "react";
+import { createContext,useContext,useEffect,useState } from "react";
 
 const TokenContext = createContext()
 
@@ -10,12 +10,15 @@ const TokenProvider = ({children})=>{
     const[songs,setSongs]= useState([]);
     const[currentSong,setCurSong] = useState(null)
     const[currFolder,setCurFolder] = useState(null)
-    const[colors,setColors] = useState(null)
+    const[sPlaylist,selectPlaylist] = useState(false)
     const setUserEmail = (val)=>{
         setEmail(val);
     }
-    const setColour=(val)=>{
-        setColors(val)
+
+   
+    const selectedPlaylist=(val)=>{
+        selectPlaylist((prev)=>!prev)
+        
     }
     const setAccTk = (val)=>{
         setAccessToken(val)
@@ -32,17 +35,18 @@ const TokenProvider = ({children})=>{
     const setSongsTK = (songUrls)=>{
         setSongs((prev)=>{
             const prevSongs = [...prev]
-            console.log(prev)
             if(prevSongs.length !==0){
               songUrls.forEach((newsong)=>{
-                const id = prevSongs.findIndex((song)=>song.folder === newsong.folder);
+                // need to check
+                const id = prevSongs.findIndex((song)=>song.playlistName === newsong.playlistName);
                 if(id !== -1){
                   prev[id].audioUrls = newsong.audioUrls
                 }
                 else{
-                  prev.push({
-                    folder:newsong.folder,
-                    audioUrls:newsong.audioUrls
+                  prevSongs.push({
+                    playlistName:newsong.playlistName,
+                    details:newsong.details,
+                    playlistImage:newsong.playlistImage
                   })
                 }
               })
@@ -56,7 +60,7 @@ const TokenProvider = ({children})=>{
     return (
         <TokenContext.Provider value = {{refreshToken,accessToken,
         setAccTk,setRefTk,email,setUserEmail,username,setUsername,songs,setSongsTK,setCurrFolder,
-        setCurrentSong,currFolder,currentSong,colors,setColour}}>
+        setCurrentSong,currFolder,currentSong,sPlaylist,selectedPlaylist}}>
             {children}
         </TokenContext.Provider>
     )

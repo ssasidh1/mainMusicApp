@@ -38,9 +38,9 @@
     display: flex;
     align-items: center;
     direction: row;
-    margin-left: 20rem;
+    margin-left: 36rem;
     gap: 0.5rem;
-    width: 65rem;
+    width:100%;
 }
 .stack4-div{
     display:flex;

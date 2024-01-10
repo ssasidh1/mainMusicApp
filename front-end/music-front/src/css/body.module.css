@@ -21,7 +21,7 @@
     justify-content: center;
     width: 10rem;
     height: 10rem;
-    background-color: rgb(35, 39, 38);
+    /* background-color: rgb(35, 39, 38); */
     border-radius: 0.75rem;
     gap:0.5rem;
 }
@@ -49,3 +49,9 @@
 
 
 
+.playlist-logo{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0.75rem;
+    margin-top: 1rem;
+}

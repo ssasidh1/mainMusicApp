@@ -1,25 +1,18 @@
-import React,{useEffect} from 'react'
-import styles from './css/body.module.css'
-function Body({playlist,url}) {
- 
+import React, { useEffect, useState } from 'react'
+import { useToken } from './context';
+import { BodyMain } from './bodyMain';
+import { BodySelected } from './bodySelected';
+function Body({playlist}) {
+  const {sPlaylist} = useToken();
+  console.log("body",sPlaylist)
   return (
-    <div >
-        {
-          <div className={styles['playlist']}>
-            <div className={styles['card']}>
-              <div className={styles['image']}>
-                  <div className={styles['folder-circle']}>
-                        {playlist}
-                    </div>
-              </div>
-            </div>
-            <div className={styles['details']}>
-                <span className={styles['playlist-name']}>{playlist}</span>
-                <span className={styles['artist']}>{url[0].artist}</span>
-              </div>
-          </div>
-        }
-    </div>
+    <div>
+    {!sPlaylist ? (
+      <BodyMain playlist={playlist} />
+    ) : (
+      <BodySelected />
+    )}
+  </div>
   )
 }
 

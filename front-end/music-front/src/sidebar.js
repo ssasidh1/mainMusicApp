@@ -4,15 +4,15 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import { useToken } from './context';
-export var randomColor = ()=> {
-    const baseColor = Math.floor(Math.random()*16777215).toString(16);
-    const invertColor = (0xffffff ^ parseInt(baseColor, 16)).toString(16).padStart(6, '0');
-    const newColors = { b: baseColor, i: invertColor };
+// export var randomColor = ()=> {
+//     const baseColor = Math.floor(Math.random()*16777215).toString(16);
+//     const invertColor = (0xffffff ^ parseInt(baseColor, 16)).toString(16).padStart(6, '0');
+//     const newColors = { b: baseColor, i: invertColor };
 
-    return newColors;
-}
+//     return newColors;
+// }
 export default function Sidebar() {
-    const {songs,setColour} = useToken()
+    const {songs} = useToken()
     const [selectSong, setSelectSong] = useState(false)
     
    
@@ -41,16 +41,14 @@ export default function Sidebar() {
             </div>
             {
                 
-                songs.length>0 && songs.folder !==null && songs.map((song,index)=>{
-                    const color = randomColor();
+                songs.length>0 && songs.details !==null && songs.map((song,index)=>{
+                    
                     return(
-                    <li key={index} className={styles['li-playlist']}onClick={()=>{setSelectSong(prev=>!prev);setColour(color)}}>
-                        
-                        <div className={styles['playlist-logo']} style={{ backgroundColor: `#${color.b}`,color:`#${color.i}`}}>
-                            {song.folder.charAt(0).toUpperCase()}
-                        </div>{song.folder}
+                    <li key={index} className={styles['li-playlist']}onClick={()=>{setSelectSong(prev=>!prev);}}>
+                        <img className={styles['playlist-logo']} src={song.playlistImage}/>
+                        {song.playlistName}
                         {selectSong&&<ul>
-                            {song && song.audioUrls.map((audioUrl, id)=>(
+                            {song && song.details.map((audioUrl, id)=>(
                                 <li key={id}>
                                     
                                 </li>

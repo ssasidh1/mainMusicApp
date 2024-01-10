@@ -57,18 +57,18 @@ function Player({src}) {
             }, 100);
             return () => clearInterval(interval);
         }
-        if(currentSong && duration){
-            console.log(currentSong)
-            const res = currentSong.split('/')
-            const path = res[res.length-1]
-            //console.log(path)
-            const foldersong = path.split('%2F')
-            folder = foldersong[0];
-            songName = foldersong[1].split('.mp3')[0]
-            file = foldersong[1]
-            artist=foldersong[0]
-            time=duration
-        }
+        // if(currentSong && duration){
+        //     console.log(currentSong)
+        //     const res = currentSong.split('/')
+        //     const path = res[res.length-1]
+        //     //console.log(path)
+        //     const foldersong = path.split('%2F')
+        //     folder = foldersong[0];
+        //     songName = foldersong[1].split('.mp3')[0]
+        //     file = foldersong[1]
+        //     artist=foldersong[0]
+        //     time=duration
+        // }
         if(isFav){
             console.log(isFav)
             const r = async()=>{await showmoreClick()}
@@ -123,11 +123,11 @@ async function getAudioDuration(audioUrl) {
 }
 
 const showmoreClick = async()=>{
-    console.log("called")
+    //console.log("called")
     if(folder && songName && file && artist && time){
         // must add playlist name, custom given by user
         const folderName = isFav ? "LikedSongs":folder
-        console.log("foldername",email)
+        //console.log("foldername",email)
         const songParams = {folder:folderName,songName:songName,file:file,artist:artist,duration:time}
         const response = email ? await fetch('http://localhost:3005/insertPlaylist',{
         method:"POST",
@@ -144,7 +144,7 @@ const showmoreClick = async()=>{
         }):
         null;
         if(response){
-            console.log("Show more ",response);
+            //console.log("Show more ",response);
         }
     }
     
@@ -193,10 +193,11 @@ const showmoreClick = async()=>{
             </div>
             <div className={style['stack3-div']}>
                     <Typography sx={{color:'silver'}}>{formatTime(elapsed)}</Typography>
-                    <Slider value={elapsed} sx= {{color:'silver',width:"100%",height:2,'&:hover':{color:'white',cursor:'auto'},
-                    '& .MuiSlider-thumb':{width:'13px',height:'13px',display: 'none',} ,value:{elapsed} ,max :{duration}} }
+                    <Slider value={elapsed ===0? 0: ((100/duration)*elapsed)} sx= {{color:'silver',height:2,'&:hover':{color:'white',cursor:'auto'},
+                    '& .MuiSlider-thumb':{display: 'none',}, '& .MuiSlider-rail':{width:'100% !important'}
+                     ,max :{duration}}} 
                     />
-                    {console.log('elapsed',elapsed)}
+                    {/* {console.log('elapsed',elapsed, duration)} */}
                     <Typography sx={{color:'silver'}}>{formatTime(duration - elapsed)}</Typography>
             </div>
         </div>

@@ -11,7 +11,7 @@ export default function MainPage() {
     
     <div className={styles['main']}>
     <div className={styles['login-main']}>
-        <img src='./Grovify.png' alt="grovify" className={styles['grove-logo']}></img>
+        <img src='./Grovify.png' alt="grovify" className={styles['grove-logo']}/>
         <button className={styles['login-btn']} onClick={handleClick}>Connect</button>
     </div>
     <div className={styles['lap-div']}>

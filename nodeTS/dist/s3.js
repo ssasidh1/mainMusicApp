@@ -153,7 +153,7 @@ const getAllPlaylists = async () => {
                 const playlistN = (_a = playlistPrefix.Prefix) === null || _a === void 0 ? void 0 : _a.replace("/", "");
                 return {
                     playlistName: playlistN,
-                    imageURl: `s3://${bucketN}/${playlistPrefix.Prefix}${playlistN}.jpeg`
+                    imageURl: `https://${bucketN}.s3.amazonaws.com/${playlistPrefix.Prefix}${playlistN}.jpeg`
                 };
             });
             return playlist;
@@ -183,29 +183,44 @@ const getFilesForPlaylist = async (playlistName) => {
             Bucket: bucketN,
             Prefix: `${playlistName}/`
         };
-        let currFile;
         const data = await s3.listObjectsV2(params).promise();
         //console.log("data",data.Contents)
         if (data.Contents) {
             let tem = {};
             const files = await Promise.all(data.Contents.map(async (file) => {
-                var _a;
-                console.log("lets begin");
+                let currFile;
+                //console.log("lets begin")
                 if (file.Key) {
-                    if ((_a = file.Key) === null || _a === void 0 ? void 0 : _a.endsWith("/")) {
-                        //console.log('fil',file.Key)
-                        const metadataParams = {
-                            Bucket: bucketN,
-                            Key: file.Key,
-                        };
-                        const metadata = await s3.headObject(metadataParams).promise();
-                        if (metadata.Metadata) {
+                    // if(file.Key?.endsWith("/")){
+                    //console.log('fil',file.Key)
+                    const metadataParams = {
+                        Bucket: bucketN,
+                        Key: file.Key,
+                    };
+                    const metadata = await s3.headObject(metadataParams).promise();
+                    if (metadata.Metadata) {
+                        console.log("c", metadata.Metadata);
+                        if (Object.keys(metadata.Metadata).length > 0 && file.Key.split('/').length > 2) {
                             currFile = metadata.Metadata;
-                            //console.log("c",metadata.Metadata)
-                            if (Object.keys(metadata.Metadata).length > 0)
-                                return currFile;
+                            const songPrefix = file.Key.substring(0, file.Key.lastIndexOf('/'));
+                            const temPath = `https://${bucketN}.s3.amazonaws.com/${songPrefix}`;
+                            //console.log("tempath",temPath)
+                            if (!tem[temPath]) {
+                                //console.log("check temp path",tem[temPath])
+                                tem[temPath] = {};
+                            }
+                            //console.log("\n^^^^^currfile",currFile)
+                            if (currFile.artist && !tem[temPath]['artist']) {
+                                //console.log("\nartist",currFile.artist)
+                                tem[temPath]['artist'] = currFile.artist;
+                            }
+                            if (currFile.songname && !tem[temPath]['songName']) {
+                                //console.log("\songName",currFile.songname)
+                                tem[temPath]['songName'] = currFile.songname;
+                            }
                         }
                     }
+                    //}
                     if (file.Size && file.Key.split('/').length > 2) {
                         const fileName = file.Key.split('/').pop();
                         //console.log("filename",fileName)
@@ -213,15 +228,15 @@ const getFilesForPlaylist = async (playlistName) => {
                         if (fileName) {
                             const temKey = fileName.endsWith('.mp3') ? 'audio' : fileName.endsWith('.jpeg') ? 'image' : null;
                             if (temKey) {
-                                const temPath = `s3://${bucketName}/${songPrefix}`;
-                                console.log("tempath", temPath, temKey);
+                                const temPath = `https://${bucketN}.s3.amazonaws.com/${songPrefix}`;
+                                //console.log("tempath",temPath,temKey)
                                 if (!tem[temPath]) {
-                                    console.log("check temp path", tem[temPath]);
+                                    //console.log("check temp path",tem[temPath])
                                     tem[temPath] = {};
                                 }
                                 if (!tem[temPath][temKey]) {
-                                    console.log("check", tem[temPath][temKey]);
-                                    tem[temPath][temKey] = `s3://${bucketName}/${file.Key}`;
+                                    //console.log("check",tem[temPath][temKey]);
+                                    tem[temPath][temKey] = `https://${bucketN}.s3.amazonaws.com/${file.Key}`;
                                 }
                             }
                         }
@@ -246,7 +261,8 @@ const getFilesForPlaylist = async (playlistName) => {
             //     }
             //     return result;
             // }, []);
-            console.log("combined", tem);
+            const res = Object.values(tem);
+            //console.log("combined",tem)
             return tem;
         }
     }
@@ -260,19 +276,19 @@ export async function getAllPlaylistSongs(app) {
     app.get("/getAllPlaylistAndSongs", async (req, res) => {
         try {
             const playlists = await getAllPlaylists();
-            console.log("playlists", playlists);
+            //console.log("playlists",playlists)
             let allPlayLists = [];
             if (playlists) {
                 //let allPlayLists:any = [{playlistName:playlist.playlistName}]
                 for (const playlist of playlists) {
                     // console.log(playlist)
                     const files = await getFilesForPlaylist(playlist.playlistName);
-                    //console.log(files)
+                    //console.log("\n %%%%%%",files)
                     let artist;
                     if (files !== undefined) {
                         //not sure if always the first index holds artist name
-                        artist = files.artist;
-                        allPlayLists.push({ playlistName: playlist.playlistName, playlistImage: playlist.imageURl, artist: artist, songs: files });
+                        //  artist = files.artist
+                        allPlayLists.push({ playlistName: playlist.playlistName, playlistImage: playlist.imageURl, details: Object.values(files) });
                         //console.log("filex,",allPlayLists[0])
                     }
                     // if(files)

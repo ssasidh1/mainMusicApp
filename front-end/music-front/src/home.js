@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { TokenProvider,useToken } from './context'
-import SongList from './songList';
+// import SongList from './songList';
 import Grovify from './grovify';
 function Home() {
     const {refreshToken,accessToken,setAccTk,setRefTk} = useToken();
@@ -17,7 +17,7 @@ function Home() {
         
     },[refreshToken,accessToken])
     const getPlaylistSongs = async()=>{
-      console.log(playlistname.current.value)
+      //console.log(playlistname.current.value)
       if(playlistname){
         const resp = await fetch("http://localhost:3005/userPlaylist",{
         method:"POST",
@@ -30,7 +30,7 @@ function Home() {
         })
       }) 
       const result =await resp.json();
-      console.log("pla",result)
+      //console.log("pla",result)
     }
     }
   return (
