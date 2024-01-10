@@ -3,7 +3,8 @@
    
 }
 .playlist-img{
-    width: 15rem;
+    width: 200px;
+    height: 200px;
     border-radius: 0.5rem;
 }
 
@@ -12,6 +13,9 @@
     flex-direction: row;
     gap: 1rem;
     align-items: flex-end;
+    background: linear-gradient( rgba(155, 47, 92, 0.479) ,rgba(155, 47, 92, 0.479),rgb(51, 71, 73));
+    padding: 1rem 1rem;
+    border-radius: 0.5rem;
 }
 .playlist-highlights{
     display: flex;
@@ -34,4 +38,66 @@
     display: flex;
     align-items: center;
     gap:0.5rem;
+}
+
+.items{
+    display: flex;
+}
+.index{
+color: white;
+margin-right: 1rem;
+}
+.li-items{
+    color: whitesmoke;
+    display: flex;
+    align-items: flex-start;
+    padding: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+.li-items:hover{
+    background: linear-gradient(transparent,rgba(0, 0, 1, 0.533));
+}
+.ol-items{
+    display: flex;
+    list-style-type: decimal;
+    flex-direction: column;
+    gap:0.1rem;
+    color: whitesmoke;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.songName{
+    font-size: medium;
+}
+.artist{
+    font-size: small;
+    color:silver;
+}
+
+
+.list{
+ margin-top: 5px;
+ background: linear-gradient( rgba(82, 160, 156, 0.655),rgba(47, 151, 155, 0.142) );
+ /* height: 50vh; */
+ padding: 0.4rem 1rem;
+ border-radius: 0.5rem;
+}
+td{
+    color:silver;
+    padding: 8px;
+}
+
+.mainlist{
+    /* background: linear-gradient( rgb(122, 38, 59) 220px ,rgb(0, 0, 1)90%);
+    padding: 0.4rem 1rem; */
+    /* background-color: rgb(122, 38, 59); */
+}
+
+.options{
+    display: flex;
+    gap:1rem;
+    margin-bottom: 1rem;
+    align-items: center;
 }

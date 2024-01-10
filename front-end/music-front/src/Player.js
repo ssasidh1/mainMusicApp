@@ -17,7 +17,6 @@ import { Slider,Typography} from '@mui/material';
 import { useToken } from './context';
 function Player({src}) {
     const audioRef= useRef()
-    const [currentSong] = useState(src)
     const [isPlaying,setIsPlaying] = useState(false)
     const [isFav, setIsFav] = useState(false)
     const [volume,setVolume] = useState(30)
@@ -26,7 +25,8 @@ function Player({src}) {
     const [duration, setDuration] = useState(0);
     const [showMoreOpt,setShowMoreOpt] = useState(false)
     let folder,songName,time,artist,file;
-    const {email} = useToken();
+    const {email,setCurrentSong,currentSong} = useToken();
+    setCurrentSong(src);
     const togglePlay = ()=>{
         if(!isPlaying){
             audioRef.current.play()
@@ -38,11 +38,16 @@ function Player({src}) {
     }
   
     useEffect(()=>{
-        if(currentSong)
+        const x = async()=>
         {
-            const audioUrl = currentSong;
-            getAudioDuration(audioUrl);
+            if(currentSong)
+            {
+                const audioUrl = currentSong;
+                const rex = await getAudioDuration(audioUrl);
+                console.log("durrr",rex,audioUrl)
+            }
         }
+        x();
         if(audioRef && audioRef.current){
             audioRef.current.volume = volume/100
         }
@@ -114,7 +119,7 @@ async function getAudioDuration(audioUrl) {
     const audioBuffer = await fetchAudioBuffer(audioUrl);
     const durationInSeconds = audioBuffer.duration;
     //console.log(audioBuffer)
-    //console.log('Audio Duration:', durationInSeconds, audioUrl);
+    console.log('Audio Duration:', durationInSeconds);
     setDuration(durationInSeconds); // Set duration using state
     return durationInSeconds;
   } catch (error) {
