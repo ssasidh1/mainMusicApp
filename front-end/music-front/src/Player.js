@@ -26,7 +26,7 @@ function Player({src}) {
     const [showMoreOpt,setShowMoreOpt] = useState(false)
     let folder,songName,time,artist,file;
     const {email,setCurrentSong,currentSong} = useToken();
-    setCurrentSong(src);
+    
     const togglePlay = ()=>{
         if(!isPlaying){
             audioRef.current.play()
@@ -36,18 +36,20 @@ function Player({src}) {
         }
         setIsPlaying(prev=>!prev)
     }
-  
-    useEffect(()=>{
-        const x = async()=>
+  useEffect(()=>{
+    const x = async()=>
+    {
+        if(currentSong)
         {
-            if(currentSong)
-            {
-                const audioUrl = currentSong;
-                const rex = await getAudioDuration(audioUrl);
-                console.log("durrr",rex,audioUrl)
-            }
+            const audioUrl = currentSong.audio;
+            const rex = await getAudioDuration(audioUrl);
+            console.log("durrr",rex,audioUrl)
         }
-        x();
+    }
+    x();
+  },[currentSong])
+    useEffect(()=>{
+       
         if(audioRef && audioRef.current){
             audioRef.current.volume = volume/100
         }
@@ -80,8 +82,9 @@ function Player({src}) {
             console.log("r",r)
             r();
         }
+        setCurrentSong(src);
         
-    },[isFav,currentSong,volume,isPlaying])
+    },[isFav,volume,isPlaying])
    
 
     function formatTime(time) {
@@ -105,7 +108,7 @@ function Player({src}) {
             : volume <= 75 ? <VolumeDownIcon sx={{color: 'silver', '&:hover': {color: 'white'}}} onClick={() => setMute(!mute)} />
             : <VolumeUpIcon sx={{color: 'silver', '&:hover': {color: 'white'}}} onClick={() => setMute(!mute)} />
     }
-    const audioContext = new (window.AudioContext || window.AudioContext)();
+    const audioContext = new (window.AudioContext)();
 
 async function fetchAudioBuffer(audioUrl) {
   const response = await fetch(audioUrl);
@@ -161,16 +164,10 @@ const showmoreClick = async()=>{
   return (
     <>
     { src && <div className={style['div-bg']}>
-       <audio src= {src} ref ={audioRef} muted={mute}/>
+       <audio src= {src.audio} ref ={audioRef} muted={mute}/>
         <div className={style['audio-div']}>
             <div className={style['box-div']}>
-                <div className={style['stack-div']}>
-                    {/* <VolumeDownIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/> */}
-                    <VolumeBtns/>
-                    <Slider sx= {{color:'silver',width:'5rem',height:2,'&:hover':{color:'white',cursor:'auto'},
-                    '& .MuiSlider-thumb':{width:'13px',height:'13px'},min:0,max:1, value:{volume}}}
-                     onChange={(e,v)=>{setVolume(v)}}/>
-                </div>
+                
                 <div className={style['stack2-div']}>
                     <SkipPreviousIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/>
                     <FastRewindIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/>
@@ -185,6 +182,14 @@ const showmoreClick = async()=>{
                     <SkipNextIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/>
                 
                 </div>
+                <div className={style['options']}>
+                <div className={style['stack-div']}>
+                    {/* <VolumeDownIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/> */}
+                    <VolumeBtns/>
+                    <Slider sx= {{color:'silver',width:'5rem',height:2,'&:hover':{color:'white',cursor:'auto'},
+                    '& .MuiSlider-thumb':{width:'13px',height:'13px'},min:0,max:1, value:{volume}}}
+                     onChange={(e,v)=>{setVolume(v)}}/>
+                </div>
                 <div className={style['stack4-div']}>
                     {!isFav ? <FavoriteBorderIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}} onClick={handleFav}/>
                     :<FavoriteIcon sx= {{color:'white','&:hover':{color:'silver'},cursor:'pointer'}} onClick={()=>{setIsFav(prev=>!prev)}}/>
@@ -193,8 +198,8 @@ const showmoreClick = async()=>{
                     {showMoreOpt&&<div className={style['showmore']}>
                         <button onClick={showmoreClick}>add playlist</button>
                     </div>}
+                </div> 
                 </div>
-                
             </div>
             <div className={style['stack3-div']}>
                     <Typography sx={{color:'silver'}}>{formatTime(elapsed)}</Typography>
@@ -205,6 +210,7 @@ const showmoreClick = async()=>{
                     {/* {console.log('elapsed',elapsed, duration)} */}
                     <Typography sx={{color:'silver'}}>{formatTime(duration - elapsed)}</Typography>
             </div>
+            
         </div>
     </div>}
     </>

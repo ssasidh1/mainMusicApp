@@ -15,11 +15,10 @@ export default function Grovify(token) {
     useEffect(()=>{
         curr =songs && songs[0] ? songs[0].details[0].audio:null
         if(curr!==null){
-            setCurrentSong(curr)
+            setCurrentSong(songs[0].details[0])
             setCurrFolder(songs[0])
         }
     },[songs])
-    console.log("song",songs)
   return (
     <div className={styles['container']}>
         <div className={styles['grovify_body']}>

@@ -10,7 +10,7 @@ export function BodySelected(){
     console.log("selectred playlist",currFolder)
     const handleSelectSong= (item)=>{
         console.log("e",item)
-        setCurrentSong(item.audio)
+        setCurrentSong(item)
     }
     return(
         <div className={styles['mainlist']}>
@@ -33,12 +33,17 @@ export function BodySelected(){
                 <FavoriteBorderIcon sx={{color:'silver', fontSize:"2rem"}}/>
                 <MoreHorizIcon sx={{color:'silver', fontSize:"2rem"}}/>
                 </div>
+                <table>
+                    <tbody>
                     <tr>
                         <td>#</td>
                         <td>Title</td>
                     </tr>
+                    </tbody>
+                </table>
                 <div className={styles['items']}>
-                    
+                    <table className={styles['table']}>
+                    <tbody className={styles['tbody']}>
                     <tr className={styles['ol-items']}>
                         {currFolder.details.map((item,ind)=>{
                             return(
@@ -55,6 +60,8 @@ export function BodySelected(){
                         )})
                         }
                     </tr>
+                    </tbody>
+                    </table>
                 </div>
             </div>
           </div>

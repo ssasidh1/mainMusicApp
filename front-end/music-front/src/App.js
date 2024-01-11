@@ -5,6 +5,9 @@ import Login from './login.js'
 import Signup from './signup.js';
 import Home from './home.js'
 import MainPage from './mainPage.js';
+import {BodyMain } from './bodyMain.js';
+import Body from "./body"
+import { BodySelected } from './bodySelected.js';
 import { TokenProvider,useToken } from './context'
 import {HashRouter, Navigate, Route,Routes} from "react-router-dom"
 function App() {
@@ -16,7 +19,8 @@ function App() {
         <Route path="/home" element={<Home/>} />
         <Route path="/mainPage" element={<MainPage/>}/>
         <Route path= "*" element = {<Navigate to = "/MainPage"/>}/>
-
+        <Route path="/playlist" element={<BodyMain/>} />
+        <Route path="/track" element={<BodySelected/>} />
      </Routes>
      </TokenProvider>
   );

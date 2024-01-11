@@ -101,3 +101,12 @@ td{
     margin-bottom: 1rem;
     align-items: center;
 }
+
+.table{
+    width: 100%;
+
+}
+
+.tbody{
+    width: 100%;
+}

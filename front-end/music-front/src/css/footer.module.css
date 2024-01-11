@@ -8,8 +8,8 @@
     position: absolute;
     display: flex;
     gap:0.5rem;
-    align-items: baseline;
-    margin-top: 2rem;
+    align-items: center;
+    margin-top: 1rem;
     margin-left: 2rem;
     color:whitesmoke
 }
@@ -22,13 +22,28 @@
  }
 
  .playlist-logo{
-    width: 40px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     border-radius: 0.25rem;
     text-align: center;
     font-size: larger;
 }
 
  .song{
-    margin-left: 10rem;
+    margin-left: 17rem;
+ }
+
+ .details{
+    display: flex;
+    flex-direction: column;
+    gap:0.25rem;
+ }
+
+ .currSong{
+    font-size: medium;
+    color: whitesmoke;
+ }
+ .artist{
+    font-size: small;
+    color: silver;
  }

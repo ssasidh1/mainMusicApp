@@ -60,8 +60,28 @@ li{
 
 
 .playlist-logo{
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    font-size: larger;
+    width: 60px;
+    height: 60px;
+    border-radius: 0.25rem;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    gap:0.5rem;
+}
+
+.playlist-artist{
+    font-size: small;
+    color: silver;
+}
+
+.playlist-name{
+    font-size: medium;
+}
+
+.playlist-info{
+    display: flex;
+    flex-direction: column;
+    gap:2px;
 }

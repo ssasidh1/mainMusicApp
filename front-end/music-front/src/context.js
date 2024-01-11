@@ -17,7 +17,7 @@ const TokenProvider = ({children})=>{
 
    
     const selectedPlaylist=(val)=>{
-        selectPlaylist((prev)=>!prev)
+        selectPlaylist(val)
         
     }
     const setAccTk = (val)=>{
