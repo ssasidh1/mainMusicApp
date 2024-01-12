@@ -1,8 +1,8 @@
-GET http://localhost:3000/posts
+GET http://ec2-54-237-118-91.compute-1.amazonaws.com:3000/posts
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWsiLCJpYXQiOjE3MDI5NDU2MjF9.Gq9HeGLTOKTZ0YzhOIjGDceNnW5d_QWC6YHT-sG0KQo
 ###
 
-POST http://localhost:4000/login
+POST http://ec2-54-237-118-91.compute-1.amazonaws.com:4000/login
 Content-Type: application/json
 
 {

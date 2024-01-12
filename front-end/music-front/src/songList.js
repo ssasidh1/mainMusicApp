@@ -12,7 +12,7 @@ const SongList = ({token}) => {
       try {
         console.log("inisde songlist")
         //console.log("at",token.rt)
-        const response = await fetch('http://localhost:3005/getAllPlaylistAndSongs',{
+        const response = await fetch('http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/getAllPlaylistAndSongs',{
             method:"GET",
             mode:'cors',
             headers:{

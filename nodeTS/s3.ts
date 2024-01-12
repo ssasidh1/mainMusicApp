@@ -65,7 +65,7 @@ export function getPlaylists(app:Express){
                 
 
                 return {
-                  url: `http://localhost:3005/stream/${encodeURIComponent(object.Key)}`,
+                  url: `http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/stream/${encodeURIComponent(object.Key)}`,
                   artist: artistName,
                 };
         }
@@ -136,7 +136,7 @@ res.json(playlist);
         // console.log("contents",contents)
         const audioUrls = contents.map((object) => {
           if (object.Key && object.Key.endsWith("mp3")) {
-            return `http://localhost:3005/stream/${encodeURIComponent(object.Key)}`;
+            return `http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/stream/${encodeURIComponent(object.Key)}`;
           }
           return null;
         });

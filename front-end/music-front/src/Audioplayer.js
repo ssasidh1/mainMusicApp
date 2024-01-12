@@ -5,7 +5,7 @@ const AudioPlayer = () => {
 
   useEffect(() => {
     // Set the source dynamically when the component mounts
-    audioRef.current.src = 'http://localhost:3005/playlist';
+    audioRef.current.src = 'http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/playlist';
   }, []);
 
   return (

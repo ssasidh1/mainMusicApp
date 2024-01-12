@@ -1,4 +1,4 @@
-POST http://localhost:4000/login
+POST http://ec2-54-237-118-91.compute-1.amazonaws.com:4000/login
 Content-Type: application/json
 
 {
@@ -6,13 +6,13 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/posts
+GET http://ec2-54-237-118-91.compute-1.amazonaws.com:3000/posts
 
 
 
 ###
 
-POST http://localhost:3005/login
+POST http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/login
 Content-Type: application/json
 
 {
@@ -23,11 +23,11 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3005/getAllPlaylistAndSongs
+GET http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/getAllPlaylistAndSongs
 
 
 ###
-POST http://localhost:3005/insertPlaylist
+POST http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/insertPlaylist
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3005/insertPlaylist
+POST http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/insertPlaylist
 Content-Type: application/json
 
 {
@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ###
-POST  http://localhost:3005/deleteFromPlaylist
+POST  http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/deleteFromPlaylist
 Content-Type: application/json
 
 {
@@ -64,7 +64,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE   http://localhost:3005/deletePlaylist
+DELETE   http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/deletePlaylist
 Content-Type: application/json
 
 {
@@ -73,7 +73,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3005/userPlaylist
+POST http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/userPlaylist
 Content-Type: application/json
 
 {
