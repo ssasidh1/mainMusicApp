@@ -53,7 +53,7 @@ export function getPlaylists(app) {
                                         //console.log("artit",metadata.Metadata)
                                     }
                                     return {
-                                        url: `http://localhost:3005/stream/${encodeURIComponent(object.Key)}`,
+                                        url: `https://ec2-54-237-118-91.compute-1.amazonaws.com:3005/stream/${encodeURIComponent(object.Key)}`,
                                         artist: artistName,
                                     };
                                 }
@@ -116,7 +116,7 @@ export function getUserPlaylist(app) {
             // console.log("contents",contents)
             const audioUrls = contents.map((object) => {
                 if (object.Key && object.Key.endsWith("mp3")) {
-                    return `http://localhost:3005/stream/${encodeURIComponent(object.Key)}`;
+                    return `https://ec2-54-237-118-91.compute-1.amazonaws.com:3005/stream/${encodeURIComponent(object.Key)}`;
                 }
                 return null;
             });
