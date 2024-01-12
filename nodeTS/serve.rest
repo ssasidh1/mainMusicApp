@@ -1,4 +1,4 @@
-POST http://ec2-54-237-118-91.compute-1.amazonaws.com:4000/login
+POST https://ec2-54-237-118-91.compute-1.amazonaws.com:4000/login
 Content-Type: application/json
 
 {
@@ -6,13 +6,13 @@ Content-Type: application/json
 }
 
 ###
-GET http://ec2-54-237-118-91.compute-1.amazonaws.com:3000/posts
+GET https://grovifyec2.nidhiworks.com:443
 
 
 
 ###
 
-POST http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/login
+POST https://grovifyec2.nidhiworks.com:443/login
 Content-Type: application/json
 
 {
@@ -23,11 +23,11 @@ Content-Type: application/json
 
 
 ###
-GET http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/getAllPlaylistAndSongs
+GET https://grovifyec2.nidhiworks.com:443/getAllPlaylistAndSongs
 
 
 ###
-POST http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/insertPlaylist
+POST https://grovifyec2.nidhiworks.com:443/insertPlaylist
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/insertPlaylist
+POST https://grovifyec2.nidhiworks.com:443/insertPlaylist
 Content-Type: application/json
 
 {
@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ###
-POST  http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/deleteFromPlaylist
+POST  https://grovifyec2.nidhiworks.com:443/deleteFromPlaylist
 Content-Type: application/json
 
 {
@@ -64,7 +64,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE   http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/deletePlaylist
+DELETE   https://grovifyec2.nidhiworks.com:443/deletePlaylist
 Content-Type: application/json
 
 {
@@ -73,7 +73,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/userPlaylist
+POST https://grovifyec2.nidhiworks.com:443/userPlaylist
 Content-Type: application/json
 
 {

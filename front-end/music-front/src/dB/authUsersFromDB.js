@@ -2,7 +2,7 @@ import React from 'react'
 
 export default async function AuthUsersFromDB(email, password) {
     try{console.log("user",email,password)
-    const res = await fetch('http://ec2-54-237-118-91.compute-1.amazonaws.com:3005/login',{
+    const res = await fetch('https://grovifyec2.nidhiworks.com:443/login',{
         method:"POST",
         mode:"cors",
         headers: {
