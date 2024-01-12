@@ -19,7 +19,7 @@ function Home() {
     const getPlaylistSongs = async()=>{
       //console.log(playlistname.current.value)
       if(playlistname){
-        const resp = await fetch("http://localhost:3005/userPlaylist",{
+        const resp = await fetch("https://ec2-54-237-118-91.compute-1.amazonaws.com:3005/userPlaylist",{
         method:"POST",
         mode:"cors",
         headers: {

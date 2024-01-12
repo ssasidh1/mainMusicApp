@@ -137,7 +137,7 @@ const showmoreClick = async()=>{
         const folderName = isFav ? "LikedSongs":folder
         //console.log("foldername",email)
         const songParams = {folder:folderName,songName:songName,file:file,artist:artist,duration:time}
-        const response = email ? await fetch('http://localhost:3005/insertPlaylist',{
+        const response = email ? await fetch('https://ec2-54-237-118-91.compute-1.amazonaws.com:3005/insertPlaylist',{
         method:"POST",
         mode:"cors",
         headers: {
