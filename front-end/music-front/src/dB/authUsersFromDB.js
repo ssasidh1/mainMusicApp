@@ -14,8 +14,8 @@ export default async function AuthUsersFromDB(email, password) {
           }),
     });
     return res.json();}
-    catch(ex){
-      console.log("ex",ex);
+    catch(e){
+      console.log("err",e)
     }
   }
 

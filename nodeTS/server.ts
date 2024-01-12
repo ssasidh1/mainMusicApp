@@ -15,7 +15,7 @@ app.use(cors())
 getPlaylists(app)
 getUserPlaylist(app);
 getAllPlaylistSongs(app)
-app.post("/signup",async(req,res)=>{
+app.post("/signup",async(req:Request,res:Response)=>{
     try{
         // console.log(req.body)
         await addUserDetails(req.body.email,req.body.password,req.body.username);
