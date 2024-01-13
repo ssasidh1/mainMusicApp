@@ -2,16 +2,39 @@ import styles from './css/bodySelected.module.css'
 import { useToken } from './context'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useEffect, useState } from 'react';
+
 export function BodySelected(){
-    const {currFolder,setCurrentSong} = useToken()
-    console.log("selectred playlist",currFolder)
+    const {currFolder,setCurrentSong,setSongSelectedFn,setAutoPlaySongsFn,
+    setAutoPlayFn,isautoPlay,autoplaySongs,showap,setShowap} = useToken()
+    
+    //console.log("selectred playlist",currFolder)
     const handleSelectSong= (item)=>{
-        console.log("e",item)
+        //console.log("e",item)
+        setAutoPlaySongsFn(null);
+        setShowap(false);
         setCurrentSong(item)
+        setSongSelectedFn(true);
     }
+    const autoplay = (playlist)=>{
+        console.log("autopla",playlist)
+        setAutoPlaySongsFn(playlist)
+        setAutoPlayFn(true);
+        setShowap(true);
+    }
+    const turnoffAutoplay = ()=>{
+        // setAutoPlaySongsFn(null);
+        setAutoPlayFn(false)
+        setShowap(false);
+    }
+    useEffect(()=>{
+        if(autoplaySongs && autoplaySongs[0].playlistName !== currFolder.playlistName)setShowap(false);
+        else if(autoplaySongs && autoplaySongs[0].playlistName === currFolder.playlistName){setShowap(true);}
+    },[currFolder])
     return(
         <div className={styles['mainlist']}>
         {
@@ -22,14 +45,17 @@ export function BodySelected(){
               <div className={styles['playlistName']}>{currFolder.playlistName}</div>
               <div className={styles['extra']}>
                 <div className={styles['playlistArtist']}>{currFolder.details[0].artist}</div>
-                <FiberManualRecordIcon sx={{color:'white', width:'8px'}}/>
+                <FiberManualRecordIcon sx={{color:'white', width:'8px'}} />
                 <div className={styles['noOfsongs']}>{currFolder.details.length} songs</div>
               </div>
               </div>
             </div>
             <div className={styles['list']}>
                 <div className={styles['options']}>
-                <PlayCircleIcon sx={{color:'rgb(149, 220, 216)', fontSize:"3.5rem"}}/>
+                {!showap ?
+                <PlayCircleIcon sx={{color:'rgb(149, 220, 216)', fontSize:"3.5rem"}} onClick={()=>{autoplay(currFolder.details)}}/>
+                :<PauseCircleFilledIcon sx={{color:'rgb(149, 220, 216)', fontSize:"3.5rem"}} onClick={()=>{turnoffAutoplay()}}/>
+                }
                 <FavoriteBorderIcon sx={{color:'silver', fontSize:"2rem"}}/>
                 <MoreHorizIcon sx={{color:'silver', fontSize:"2rem"}}/>
                 </div>

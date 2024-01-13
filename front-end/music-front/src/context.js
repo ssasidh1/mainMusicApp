@@ -11,11 +11,24 @@ const TokenProvider = ({children})=>{
     const[currentSong,setCurSong] = useState(null)
     const[currFolder,setCurFolder] = useState(null)
     const[sPlaylist,selectPlaylist] = useState(false)
+    const[selectedSong,setSelectedSong] = useState(false)
+    const[autoplaySongs, setAutoPlaySongs] = useState();
+    const [isautoPlay,setAutoPlay] = useState(false)
+    const [showap,setShowap] = useState(false);
     const setUserEmail = (val)=>{
         setEmail(val);
     }
+    const setSongSelectedFn= (val)=>{
+        setSelectedSong(val);
+    }
+    
+    const setAutoPlayFn = (val)=>{
+        setAutoPlay(val);
+    }
+    const setAutoPlaySongsFn = (val)=>{
+        setAutoPlaySongs(val);
+    }
 
-   
     const selectedPlaylist=(val)=>{
         selectPlaylist(val)
         
@@ -60,7 +73,8 @@ const TokenProvider = ({children})=>{
     return (
         <TokenContext.Provider value = {{refreshToken,accessToken,
         setAccTk,setRefTk,email,setUserEmail,username,setUsername,songs,setSongsTK,setCurrFolder,
-        setCurrentSong,currFolder,currentSong,sPlaylist,selectedPlaylist}}>
+        setCurrentSong,currFolder,currentSong,sPlaylist,selectedPlaylist,setSongSelectedFn,selectedSong
+        ,setAutoPlaySongsFn,autoplaySongs,setAutoPlayFn,isautoPlay,showap,setShowap}}>
             {children}
         </TokenContext.Provider>
     )

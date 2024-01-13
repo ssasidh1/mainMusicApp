@@ -9,10 +9,12 @@ import {BodyMain } from './bodyMain.js';
 import Body from "./body"
 import { BodySelected } from './bodySelected.js';
 import { TokenProvider,useToken } from './context'
+import { PlayerProvider } from './playerContext.js';
 import {HashRouter, Navigate, Route,Routes} from "react-router-dom"
 function App() {
   return (
     <TokenProvider>
+      <PlayerProvider>
       <Routes>
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
@@ -22,6 +24,7 @@ function App() {
         <Route path="/playlist" element={<BodyMain/>} />
         <Route path="/track" element={<BodySelected/>} />
      </Routes>
+     </PlayerProvider>
      </TokenProvider>
   );
 }
