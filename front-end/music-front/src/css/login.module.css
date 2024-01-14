@@ -72,6 +72,7 @@
     font-weight: bolder;
     padding: 0.5rem;
     background-color: rgba(239, 98, 175, 0.6);
+    cursor: pointer;
 }
 .newacnt{
     display:flex;
@@ -101,6 +102,7 @@ a{
 }
 .p-create{
     color: grey;
+    cursor: pointer;
 }
 .hr-line{
     border-bottom: 1px solid rgb(79, 79, 79);
@@ -124,5 +126,5 @@ a{
 .free{
     color:rgb(179, 81, 156) !important;
     font-weight: 600;
-    
+    cursor: pointer;
 }
