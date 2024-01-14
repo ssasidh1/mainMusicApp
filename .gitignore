@@ -406,4 +406,5 @@ build/
 .vscode/
 nodeTS/node_modules/
 nodeTS/vars/
-front-end/music-front/node_modu
+front-end/music-front/node_modules
+.env

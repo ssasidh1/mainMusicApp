@@ -11,8 +11,13 @@ import { BodySelected } from './bodySelected.js';
 import { TokenProvider,useToken } from './context'
 import { PlayerProvider } from './playerContext.js';
 import {HashRouter, Navigate, Route,Routes} from "react-router-dom"
+import { useEffect } from 'react';
+import {GoogleOAuthProvider} from '@react-oauth/google'
+import Cookies from 'js-cookie'
 function App() {
+  
   return (
+    // <GoogleOAuthProvider  clientId={process.env.REACT_APP_CLIENT_ID}>
     <TokenProvider>
       <PlayerProvider>
       <Routes>
@@ -26,6 +31,7 @@ function App() {
      </Routes>
      </PlayerProvider>
      </TokenProvider>
+    //  </GoogleOAuthProvider>
   );
 }
 

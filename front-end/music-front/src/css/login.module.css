@@ -120,3 +120,8 @@ a{
     bottom: 0;
     right: 2rem;
 }
+.free{
+    color:rgb(179, 81, 156) !important;
+    font-weight: 600;
+    
+}

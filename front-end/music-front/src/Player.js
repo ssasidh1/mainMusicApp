@@ -47,7 +47,7 @@ function Player({src}) {
     }
     useEffect(()=>{
         if(autoplaySongs && currentSongIdx > -1 &&isautoPlay){
-            console.log("autoplay",autoplaySongs[currentSongIdx],currentSongIdx)
+            //console.log("autoplay",autoplaySongs[currentSongIdx],currentSongIdx)
             setCurrentSong(autoplaySongs[currentSongIdx]);
             setSongSelectedFn(true);
         }
@@ -66,7 +66,7 @@ function Player({src}) {
     const handleSongIdx = ()=>{
         
         const id = autoplaySongs&&((currentSongIdx+1)  < autoplaySongs.length)  ?currentSongIdx+1:-1
-        console.log("inside",id)
+        //console.log("inside",id)
         if(!isautoPlay){setSongSelectedFn(false);}
         else{setCurrentSongIdx(id)}
     }
@@ -77,7 +77,7 @@ function Player({src}) {
         
         if(currentSong && selectedSong)
         {
-            console.log("inisde currentSong",currentSong,selectedSong,currentSongIdx)
+            //console.log("inisde currentSong",currentSong,selectedSong,currentSongIdx)
             const audioUrl = currentSong.audio;
             const rex = await getAudioDuration(audioUrl);
             setIsPlaying(true);

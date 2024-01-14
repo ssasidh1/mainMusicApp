@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
+import styles from './css/signup.module.css'
 import AddUserDetails from './dB/addUserDetails'
  function Signup() {
     const nav = useNavigate()
@@ -70,24 +71,37 @@ import AddUserDetails from './dB/addUserDetails'
     if(!errors.email && !errors.confirmPassword && !errors.password){
         // console.log("UI")
         if(email !== ""&& pass !=="")
-       {const res = await AddUserDetails({email:email,password:pass,username:username})}
+       {
+        const res = await AddUserDetails({email:email,password:pass,username:username})
+        console.log("appended",res);
+        nav('/login');
+    }
        
     }
+    }
+    const navigateTo= ()=>{
+        nav("/login")
     }
 
     
   return (
-    <div>
-        <label>EmailID</label>
-        <input type = "text" ref = {emailID} required></input>
+    <div className= {styles['main']}>
+        {/* <img src='./apple-music-note.jpg' alt="music" className={styles['music']}></img> */}
+        <div className={styles['card']}>
+        <div className={styles['title']}>Sign up to listen <br/><center>on Grovify</center></div>
+        <input className={styles['email']} placeholder='emailid@mail.com' type = "text" ref = {emailID} required></input>
         {errors.email && <p>Invalid emaildID</p>}
-        <label>Password</label>
-        <input type="password" ref = {password} required></input>
+        <input className={styles['password']}ref= {password} type = "password" placeholder='XyZ@$%123' required></input>
         {errors.password && <p>password must be atleast 10 letters</p>}
-        <label>Confirm Password</label>
-        <input type="text" ref = {confirmPassword}  required></input>
+        <input  className={styles['password']}type="text" ref = {confirmPassword} placeholder="confirm password"  required></input>
         {errors.confirmPassword && <p>Passwords doesnt match</p>}
-        <button onClick={signupSubmit}>Submit</button>
+        <button className={styles['login-btn']}onClick={signupSubmit}>Sign in</button>
+        <div className={styles['hr-line']}></div>
+        <div>
+            <p className={styles["p-create"]}>Return to log in</p>
+            <a href="#" className={styles["btn-create"]} onClick={()=>navigateTo()}>Sign up for Grovify</a>
+        </div>
+        </div>
     </div>
   )
 }

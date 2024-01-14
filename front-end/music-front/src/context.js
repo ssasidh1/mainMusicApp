@@ -28,7 +28,9 @@ const TokenProvider = ({children})=>{
     const setAutoPlaySongsFn = (val)=>{
         setAutoPlaySongs(val);
     }
-
+    const setUserName = (val)=>{
+        setUsername(val);
+    }
     const selectedPlaylist=(val)=>{
         selectPlaylist(val)
         
@@ -72,7 +74,7 @@ const TokenProvider = ({children})=>{
 
     return (
         <TokenContext.Provider value = {{refreshToken,accessToken,
-        setAccTk,setRefTk,email,setUserEmail,username,setUsername,songs,setSongsTK,setCurrFolder,
+        setAccTk,setRefTk,email,setUserEmail,username,setUserName,songs,setSongsTK,setCurrFolder,
         setCurrentSong,currFolder,currentSong,sPlaylist,selectedPlaylist,setSongSelectedFn,selectedSong
         ,setAutoPlaySongsFn,autoplaySongs,setAutoPlayFn,isautoPlay,showap,setShowap}}>
             {children}

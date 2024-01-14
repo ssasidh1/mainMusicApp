@@ -6,12 +6,25 @@ import styles from './css/grovify.module.css'
 import SongList from './songList'
 import { useToken } from './context'
 import BodyC from './bodyConnector'
-
+import Cookies from 'js-cookie';
 export default function Grovify(token) {
-    const {songs,setCurrFolder,setCurrentSong,currentSong}=useToken()
+    //console.log("env",)
+    const {songs,setCurrFolder,setCurrentSong,currentSong,setUserName}=useToken()
     SongList(token)
     let curr ;
-    
+    useEffect(()=>{
+      
+        console.log("cookie get",Cookies.get('username'))
+    if(Cookies.get('username')){
+      setUserName(Cookies.get('username'));
+    }
+    else{
+      setUserName("FreeUser");
+    }
+        
+        
+        
+      },[])
     useEffect(()=>{
         curr =songs && songs[0] ? songs[0].details[0].audio:null
         if(curr!==null){
@@ -27,8 +40,6 @@ export default function Grovify(token) {
                 <Navbar />
                 <div className={styles['body_contents']}>
                     <BodyC />
-                    
-                    
                 </div>
             </div>
         </div>

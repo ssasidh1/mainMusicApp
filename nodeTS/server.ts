@@ -71,7 +71,7 @@ app.post("/login",async(req,res)=>{
         //console.log("inisde")
         const resp = jwtToken(req.body.email);
         const resp1 =await authUsersFromDB(req.body.email,req.body.password)
-        //console.log(resp1)
+        
         res.json(resp)
     }catch(e){
         console.log("In add user details",e)
