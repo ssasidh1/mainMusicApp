@@ -63,7 +63,7 @@ function Login() {
        <div className={styles['hr-line']}></div>
         <div>
             <p className={styles["p-create"]}>Don't have an account?</p>
-            <a href="#" className={styles["btn-create"]} onClick={()=>navigateTo()}>Sign up for Grovify</a>
+            <a href="/#/signup" className={styles["btn-create"]} onClick={()=>navigateTo()}>Sign up for Grovify</a>
         </div>
         <a href="/#/home" className={styles['free']}>Try for Free</a>
         <img src='./Grovify.png' alt="grovify" className={styles['grove-logo']}></img>
