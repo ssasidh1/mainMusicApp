@@ -99,7 +99,7 @@ import AddUserDetails from './dB/addUserDetails'
         <div className={styles['hr-line']}></div>
         <div>
             <p className={styles["p-create"]}>Return to log in</p>
-            <a href="#" className={styles["btn-create"]} onClick={()=>navigateTo()}>Sign up for Grovify</a>
+            <a href="#" className={styles["btn-create"]} onClick={()=>navigateTo()}>Log in to Grovify</a>
         </div>
         </div>
     </div>
