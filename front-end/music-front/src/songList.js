@@ -6,7 +6,8 @@ import { useToken } from './context';
 const SongList = ({token}) => {
   // const [songs, setSongs] = useState([]);
   
-  const {songs,setSongsTK}=useToken();
+  const {songs,setSongsTK,allsongs}=useToken();
+
   useEffect(() => {
     const fetchSongs = async () => {
       try {
@@ -24,7 +25,6 @@ const SongList = ({token}) => {
         
         const songUrls = await response.json();
         setSongsTK(songUrls);
-        console.log("songListsss",songUrls)
         
       } catch (error) {
         console.error('Error fetching songs:', error);

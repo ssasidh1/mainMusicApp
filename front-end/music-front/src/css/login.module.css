@@ -1,5 +1,6 @@
+
 .main{
-    background-color: rgba(6, 6, 6, 0.909);
+    background-color: rgb(18, 17, 17);
     width:100vw;
     height:100vh;
     position: relative;
@@ -75,6 +76,7 @@
     cursor: pointer;
 }
 .newacnt{
+
     display:flex;
     padding:0;
     flex-direction: row;
@@ -85,6 +87,10 @@ a{
     text-decoration: underline !important; 
     font-weight: 400 !important;
     color: rgb(233, 232, 232) !important;
+}
+a[disabled]{
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .btn-create:hover{
@@ -120,7 +126,7 @@ a{
 .grove-logo{
     position: absolute;
     height: 2rem;
-    bottom: 0;
+    bottom: 1rem;
     right: 2rem;
 }
 .free{

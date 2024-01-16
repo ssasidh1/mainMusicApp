@@ -77,7 +77,7 @@ function Player({src}) {
         
         if(currentSong && selectedSong)
         {
-            //console.log("inisde currentSong",currentSong,selectedSong,currentSongIdx)
+            console.log("inisde currentSong",currentSong,selectedSong,currentSongIdx)
             const audioUrl = currentSong.audio;
             const rex = await getAudioDuration(audioUrl);
             setIsPlaying(true);
@@ -139,7 +139,10 @@ function Player({src}) {
     const audioContext = new (window.AudioContext)();
 
 async function fetchAudioBuffer(audioUrl) {
-  const response = await fetch(audioUrl);
+    console.log("$$$$$$$audiourls",audioUrl)
+  const response = await fetch(audioUrl,{
+    method:"GET",
+  });
   const arrayBuffer = await response.arrayBuffer();
   //console.log("Buff",response)
   return await audioContext.decodeAudioData(arrayBuffer);
@@ -150,7 +153,7 @@ async function getAudioDuration(audioUrl) {
     const audioBuffer = await fetchAudioBuffer(audioUrl);
     const durationInSeconds = audioBuffer.duration;
     //console.log(audioBuffer)
-    //console.log('Audio Duration:', durationInSeconds);
+console.log('--------Audio Duration:', durationInSeconds);
     setDuration(durationInSeconds); // Set duration using state
     return durationInSeconds;
   } catch (error) {

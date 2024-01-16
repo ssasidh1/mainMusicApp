@@ -15,6 +15,25 @@ const TokenProvider = ({children})=>{
     const[autoplaySongs, setAutoPlaySongs] = useState();
     const [isautoPlay,setAutoPlay] = useState(false)
     const [showap,setShowap] = useState(false);
+    const [issearched,setSearched]=useState(false);
+    const [foundFiles,setFiles] = useState()
+    const [foundArtist,setArtist] = useState()
+
+
+    const setFilesFn = (val)=>{
+        console.log("context files",val)
+        setFiles(val);
+    }
+
+    const setArtistFn = (val)=>{
+        console.log("context artist",val)
+        setArtist(val);
+    }
+
+    const setSearchedFn = (val)=>{
+        setSearched(val)
+    }
+   
     const setUserEmail = (val)=>{
         setEmail(val);
     }
@@ -76,8 +95,9 @@ const TokenProvider = ({children})=>{
         <TokenContext.Provider value = {{refreshToken,accessToken,
         setAccTk,setRefTk,email,setUserEmail,username,setUserName,songs,setSongsTK,setCurrFolder,
         setCurrentSong,currFolder,currentSong,sPlaylist,selectedPlaylist,setSongSelectedFn,selectedSong
-        ,setAutoPlaySongsFn,autoplaySongs,setAutoPlayFn,isautoPlay,showap,setShowap}}>
-            {children}
+        ,setAutoPlaySongsFn,autoplaySongs,setAutoPlayFn,isautoPlay,showap,setShowap,setSearchedFn,issearched
+        ,setArtistFn,foundArtist,setFilesFn,foundFiles}}>
+        {children}
         </TokenContext.Provider>
     )
 }

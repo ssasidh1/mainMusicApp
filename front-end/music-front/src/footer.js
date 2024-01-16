@@ -5,12 +5,12 @@ import { useToken } from './context'
 export default function Footer() {
  
   const {currFolder,currentSong} = useToken()
-  //console.log("foot",currFolder,currentSong)
+  console.log("foot",currFolder,currentSong)
   return (
     <div className={styles['footer']}>
       <div className={styles['footer-props']}>
-                {currFolder &&<div className={styles['folder']}>
-                  <img className={styles['playlist-logo']} src ={currentSong.playlistImage}/>
+                {currentSong &&<div className={styles['folder']}>
+                  <img className={styles['playlist-logo']} src ={currentSong.image}/>
                   <div className={styles['details']}>
                     <div className={styles['currSong']}>{currentSong.songName}</div>
                     <div className={styles['artist']}>{currentSong.artist}</div>

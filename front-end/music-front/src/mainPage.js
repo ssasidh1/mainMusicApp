@@ -10,12 +10,15 @@ export default function MainPage() {
   return (
     
     <div className={styles['main']}>
-    <div className={styles['login-main']}>
-        <img src='./Grovify.png' alt="grovify" className={styles['grove-logo']}/>
-        <button className={styles['login-btn']} onClick={handleClick}>Connect</button>
-    </div>
+    
     <div className={styles['lap-div']}>
     <img src='./playlist.jpg' alt="Spotify" className={styles['laptop']}></img>
+    </div>
+    <div className={styles['box']}>
+      <div className={styles['login-main']}>
+        <img src='./GrovifyNoBG.png' alt="grovify" className={styles['grove-logo']}/>
+        <button className={styles['login-btn']} onClick={handleClick}>Connect</button>
+      </div>
     </div>
     </div>
   )

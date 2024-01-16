@@ -47,9 +47,15 @@ function Login() {
         nav("/home")
       }
     }
+    const freeAcnt = ()=>{
+      setUserName("FreeUser")
+      setUserEmail("freeuser@gmail.com")
+      Cookies.set('username',"FreeUser",{secure:true})
+      nav('/home')
+    }
   return (
     <div className={styles['main']}>
-      <img src='./music.png' alt="music" className={styles['music']}></img>
+      <img src='./musicNoBG.png' alt="music" className={styles['music']}></img>
         <div className={styles['card']}>
           {/* <h3 className={styles['h3-div']}>LOG IN</h3> */}
           <div className={styles['title']}>Log in to Grovify</div>
@@ -57,7 +63,7 @@ function Login() {
           <input className={styles['password']}ref= {password} type = "password" placeholder='XyZ@$%123'></input>
           <button className={styles['login-btn']}onClick={handleLogin}>LOG IN</button>
           <div className={styles["newacnt"]}>
-                <a href="#">Forgot password?</a>
+                <a disabled href="#">Forgot password?</a>
                 
         </div>
        <div className={styles['hr-line']}></div>
@@ -65,7 +71,7 @@ function Login() {
             <p className={styles["p-create"]}>Don't have an account?</p>
             <a href="/#/signup" className={styles["btn-create"]} onClick={()=>navigateTo()}>Sign up for Grovify</a>
         </div>
-        <a href="/#/home" className={styles['free']}>Try for Free</a>
+        <div  className={styles['free']} onClick={freeAcnt}>Try for Free</div>
         <img src='./Grovify.png' alt="grovify" className={styles['grove-logo']}></img>
         </div>
         
