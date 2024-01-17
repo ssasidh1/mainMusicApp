@@ -1,18 +1,18 @@
-@media screen and (max-width: 900px) and (min-width: 600px), (min-width: 1100px) {
+
 
 .main{
     background-color: rgb(18, 17, 17);
     width:100vw;
     height:100vh;
-    position: relative;
     display: flex;
+ 
     align-items: center;
     justify-content: center;
+    row-gap: 0;
    
 }
 .card{
-    position: absolute;
-    top:25%;
+    
     display: flex;
     flex-direction: column;
     background-color: rgb(0, 0, 0);
@@ -99,9 +99,9 @@ a[disabled]{
     color:rgba(255, 255, 255, 0.953);
 }
 .music{
-    position: absolute;
-    top:0%;
-    height: 10rem;
+    grid-row: 1/2;
+    grid-column: 2/4;
+    height: 8rem;
 }
 
 .h3-div{
@@ -134,143 +134,4 @@ a[disabled]{
     color:rgb(179, 81, 156) !important;
     font-weight: 600;
     cursor: pointer;
-}
-
-}
-@media screen and (max-width: 900px){
-.main{
-    background-color: rgb(18, 17, 17);
-    width:100vw;
-    height:100vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   
-}
-.card{
-    position: absolute;
-    top:30%;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(0, 0, 0);
-    /* background: linear-gradient(155deg,rgba(255, 0, 247, 0.361),transparent,rgba(177, 46, 116, 0.76), rgba(0, 179, 255, 0.648),transparent); */
-    width: 35rem;
-    height: 30rem;
-    border-radius:2rem;
-    
-    /* border: 0.5px solid #d8e3e8; */
-    /* box-shadow: 5px 5px 5px rgba(245, 244, 240, 0.475); */
-    /* background: radial-gradient(
-    circle farthest-corner at center center,
-    #c6a9c6b8,
-    #c28ecbab,#6020548f
-  ) no-repeat; */
-    gap:1.5rem;
-    padding: 32px 0;
-    align-items: center;
-    /* justify-content: space; */
-}
-/* .card:hover{
-    
-    background: radial-gradient(
-    circle farthest-corner at center center,
-    #ebb1e9e2,
-    #d89de2d4,#602054d7
-  ) no-repeat;
-} */
-.email{
-    margin-top: 2.5rem;
-    height: 2.5rem;
-    color: whitesmoke;
-    width: 25rem;
-    padding: 0.2rem 1rem;
-    border-radius: 0.5rem;
-    font-size: large;
-    background-color:rgba(0, 0, 0, 0.75);
-    border:solid grey 1px;
-    font-family: 'Inter', sans-serif;
-}
-.password{
-    height: 2.5rem;
-    width: 25rem;
-    font-size: large;
-    padding: 0.2rem 1rem;
-    border-radius: 0.5rem;
-    color: whitesmoke;
-    background-color:rgba(0, 0, 0, 0.75);
-    border:solid grey 1px;
-    font-family: 'Inter', sans-serif;
-}
-.login-btn{
-    margin-top: 1rem;
-    border: 2px solid rgba(95, 123, 134, 0.75);
-    border-radius: 1rem;
-    height: 2.5rem;
-    width: 27rem;
-    font-size: medium;
-    font-weight: bolder;
-    padding: 0.5rem;
-    background-color: rgba(239, 98, 175, 0.6);
-    cursor: pointer;
-}
-.newacnt{
-
-    display:flex;
-    padding:0;
-    flex-direction: row;
-    align-items: center;
-    gap:10px;
-}
-a{
-    text-decoration: underline !important; 
-    font-weight: 400 !important;
-    color: rgb(233, 232, 232) !important;
-}
-a[disabled]{
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.btn-create:hover{
-    
-    color:rgba(255, 255, 255, 0.953);
-}
-.music{
-    position: absolute;
-    top:0%;
-    height: 10rem;
-}
-
-.h3-div{
-    color:white
-}
-.p-create{
-    color: grey;
-    cursor: pointer;
-}
-.hr-line{
-    border-bottom: 1px solid rgb(79, 79, 79);
-    margin-top: 10px;
-    width: 90%;
-}
-
-.title{
-    margin-top: 1.5rem;
-    color: rgb(220, 218, 218);
-    font-size: 2rem;
-    font-weight: bolder;
-}
-
-.grove-logo{
-    position: absolute;
-    height: 2rem;
-    bottom: 1rem;
-    right: 2rem;
-}
-.free{
-    color:rgb(179, 81, 156) !important;
-    font-weight: 600;
-    cursor: pointer;
-}
 }

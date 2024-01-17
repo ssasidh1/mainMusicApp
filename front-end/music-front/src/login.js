@@ -55,7 +55,7 @@ function Login() {
     }
   return (
     <div className={styles['main']}>
-      <img src='./musicNoBG.png' alt="music" className={styles['music']}></img>
+      {/* <img src='./musicNoBG.png' alt="music" className={styles['music']}></img> */}
         <div className={styles['card']}>
           {/* <h3 className={styles['h3-div']}>LOG IN</h3> */}
           <div className={styles['title']}>Log in to Grovify</div>
@@ -72,7 +72,7 @@ function Login() {
             <a href="/#/signup" className={styles["btn-create"]} onClick={()=>navigateTo()}>Sign up for Grovify</a>
         </div>
         <div  className={styles['free']} onClick={freeAcnt}>Try for Free</div>
-        <img src='./Grovify.png' alt="grovify" className={styles['grove-logo']}></img>
+        <img src='./GrovifyNoBG.png' alt="grovify" className={styles['grove-logo']}></img>
         </div>
         
         {/* <GoogleLoginPage/> */}
