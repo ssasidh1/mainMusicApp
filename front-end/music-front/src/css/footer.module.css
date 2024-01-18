@@ -11,14 +11,19 @@
     align-items: center;
     margin-top: 1rem;
     margin-left: 2rem;
-    color:whitesmoke
+    
+    color:whitesmoke;
 }
-
+.folder-div{
+   grid-template-columns: 2/2;
+    grid-template-rows: 1/2;
+}
 .footer-props{
     
-    display: flex;
-    flex-direction: row;
-    row-gap: 10rem;
+    display: grid;
+    grid-template-columns: repeat(5,20%);
+    grid-template-rows: repeat(2,50%);
+   
  }
 
  .playlist-logo{
@@ -31,6 +36,9 @@
 
  .song{
     margin-left: 17rem;
+    grid-template-columns: 1;
+    width:500px;
+    height:70px;
  }
 
  .details{

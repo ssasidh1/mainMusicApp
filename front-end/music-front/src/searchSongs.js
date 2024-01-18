@@ -5,7 +5,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { useEffect, useState } from "react";
 export default function SearchSongs(){
-    const{foundArtist, foundFiles,selectedPlaylist,setCurrFolder,email} = useToken()
+    const{foundArtist, foundFiles,selectedPlaylist,setCurrFolder,email,setFilesFn,setArtistFn,setSearchedFn} = useToken()
     const[playlistName,setPlaylistName] = useState();
     const[songParams,setSongParams] = useState([]);
     const[addedSong,setaddedSong] = useState();
@@ -14,7 +14,11 @@ export default function SearchSongs(){
     const selPlaylist=(playlist)=>{
         console.log("Inside plays")
         selectedPlaylist(true);
-        setCurrFolder(playlist)
+        setCurrFolder(playlist);
+        setFilesFn([]);
+        setArtistFn([]);
+        setSearchedFn(false);
+        selectedPlaylist(true)
     }
     useEffect(() => {
         console.log("add to playlist data", playlistName, addedSong,email);
@@ -186,7 +190,7 @@ export default function SearchSongs(){
             {foundArtist && foundArtist.map((folder,i)=>{
                 // {console.log("inisdde artist",foundArtist)}
             return(
-            <div key={i}className={styles['playlist']} onClick={()=>selPlaylist(folder)}>
+            <div key={i} className={styles['playlist']} onClick={()=>selPlaylist(folder)}>
             <div className={styles['card']}>
               <div className={styles['image']}>
               <img className={styles['playlist-logo']} src={folder.playlistImage}/>

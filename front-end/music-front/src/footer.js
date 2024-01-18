@@ -9,6 +9,7 @@ export default function Footer() {
   return (
     <div className={styles['footer']}>
       <div className={styles['footer-props']}>
+        <div className={styles['folder-div']}>
                 {currentSong &&<div className={styles['folder']}>
                   <img className={styles['playlist-logo']} src ={currentSong.image}/>
                   <div className={styles['details']}>
@@ -16,6 +17,7 @@ export default function Footer() {
                     <div className={styles['artist']}>{currentSong.artist}</div>
                   </div>
                   </div>}
+                  </div>
                 {currentSong &&<div className={styles['song']}><Player src ={currentSong}/></div>}
       </div>
     </div>

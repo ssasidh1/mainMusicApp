@@ -20,13 +20,14 @@ function Navbar() {
     //console.log("inside",ip)
     if(songs && ip.length !==0){
        songs.map((song,id)=>{
+          const ip1=ip.toLowerCase().replace(" ","")
           song.details.forEach((element,i) => {
             //console.log("in",songs[id].details[i]['artist'])
-            if(songs[id].details[i]['songName'].toString().toLowerCase().includes(ip) ){
+            if(songs[id].details[i]['songName'].toString().toLowerCase().replace(" ","").includes(ip1) ){
               //console.log("artist",songs[id].details[i]['songName'])
               found.push(songs[id].details[i])
             }
-            if(songs[id].details[i]['artist'].toString().toLowerCase().includes(ip) ){
+            if(songs[id].details[i]['artist'].toString().toLowerCase().replace(" ","").includes(ip1) ){
               //console.log("artist",songs[id].details[i]['songName'])
               if(!foundArtist.some((playlist)=>playlist.playlistName === songs[id].playlistName)){
                 foundArtist.push(songs[id])

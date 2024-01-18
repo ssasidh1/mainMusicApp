@@ -214,9 +214,22 @@ const showmoreClick = async()=>{
                     <SkipNextIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/>
                 
                 </div>
-                <div className={style['options']}>
+                <div className={style['stack3-div']}>
+                    <Typography sx={{color:'silver'}}>{formatTime(elapsed)}</Typography>
+                    <Slider value={elapsed ===0? 0: ((100/duration)*elapsed)} sx= {{color:'silver',height:2,'&:hover':{color:'white',cursor:'auto'},
+                    '& .MuiSlider-thumb':{display: 'none',}, '& .MuiSlider-rail':{width:'100% !important'}
+                     ,max :{duration}}} 
+                    />
+                    {/* {console.log('elapsed',elapsed, duration)} */}
+                    <Typography sx={{color:'silver'}}>{formatTime(duration - elapsed)}</Typography>
+                </div>
+               
+            </div>
+          
+            
+        </div>
+         <div className={style['options']}>
                 <div className={style['stack-div']}>
-                    {/* <VolumeDownIcon sx= {{color:'silver','&:hover':{color:'white'},cursor:'pointer'}}/> */}
                     <VolumeBtns/>
                     <Slider sx= {{color:'silver',width:'5rem',height:2,'&:hover':{color:'white',cursor:'auto'},
                     '& .MuiSlider-thumb':{width:'13px',height:'13px'},min:0,max:1, value:{volume}}}
@@ -232,18 +245,6 @@ const showmoreClick = async()=>{
                     </div>}
                 </div> 
                 </div>
-            </div>
-            <div className={style['stack3-div']}>
-                    <Typography sx={{color:'silver'}}>{formatTime(elapsed)}</Typography>
-                    <Slider value={elapsed ===0? 0: ((100/duration)*elapsed)} sx= {{color:'silver',height:2,'&:hover':{color:'white',cursor:'auto'},
-                    '& .MuiSlider-thumb':{display: 'none',}, '& .MuiSlider-rail':{width:'100% !important'}
-                     ,max :{duration}}} 
-                    />
-                    {/* {console.log('elapsed',elapsed, duration)} */}
-                    <Typography sx={{color:'silver'}}>{formatTime(duration - elapsed)}</Typography>
-            </div>
-            
-        </div>
     </div>}
     </>
   )
